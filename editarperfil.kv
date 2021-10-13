@@ -1,0 +1,52 @@
+#:kivy 2.0
+<label>:
+    font_name: 'lastica.ttf'
+    font_size: '20sp'
+
+<editperf>:
+    BoxLayout:
+        size_hint_x: 0.2
+        canvas.before:
+            Color:
+                rgba: .95, .95, .95, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        orientation: 'vertical'
+        padding: 20
+        spacing: 10
+
+        Label:
+            size_hint: 1, 0.4
+            text: "[b]Alterar [color=3662f6]Foto de Perfil[/color] :[/b]"
+            color: 0 , 0 , 0 , 1
+            markup: True
+        GridLayout:
+            cols: 3
+            Label:
+            TextInput:
+                size_hint: 0.5, 10
+            Label:
+                text:"Nenhum Arquivo Selecionado"
+        Label:
+            text: "Editando Perfil"
+            size_hint: 1, 0.4
+            color: 0 , 0 , 0 , 1
+        Label:
+            text: "[b]Alterar [color=3662f6]Nome de Usuario[/color] :[/b]"
+            size_hint: 1, 0.4
+            color: 0 , 0 , 0 , 1
+            markup: True
+        TextInput:
+            size_hint: 1, 0.4
+        Label:
+            size_hint: 1, 0.4
+            text: "[b]Alterar [color=3662f6]Senha[/color] :[/b]"
+            color: 0 , 0 , 0 , 1
+            markup: True
+        TextInput:
+            size_hint: 1, 0.4
+        Button:
+            text: "Confirmar"
+            size_hint: 1, 0.6
+            background_color: "#C4E3FAFF"

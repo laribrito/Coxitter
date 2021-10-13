@@ -1,0 +1,32 @@
+#:kivy 2.0
+<label>:
+    font_name: 'lastica.ttf'
+    font_size: '20sp'
+
+<editarbio>:
+    BoxLayout:
+        canvas.before:
+            Color:
+                rgba: .95, .95, .95, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        orientation: 'vertical'
+        padding: 20
+        spacing: 10
+        Label:
+            text: "Alterar [color=3662f6]bio[/color]:"
+            size_hint: 1, 0.4
+            color: 0 , 0 , 0 , 1
+            markup: True
+        TextInput:
+            size_hint: 1, 0.4
+        Widget:
+            canvas.before:
+                pos: self.center_x, 0
+                size: self.width -50, self.height
+            Button:
+                text: "Confirmar"
+                background_color: "#C4E3FAFF"
+            
+            

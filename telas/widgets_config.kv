@@ -1,0 +1,19 @@
+################################################################################
+# Configurações padrões dos widgets
+################################################################################
+
+<Button>
+    # Texto centralizado
+    valign: 'center'
+
+<TextInput>
+    # Fonte padrão
+    font_name: 'Roboto'
+    font_size: '15sp'
+    # Altura do TextInput igual a uma linha de texto + 10 (5 de espaço em cima e embaixo)
+    size_hint_y: None
+    height: self.line_height + dp(10)
+    # Sem múltiplas linhas
+    multiline: False
+    # O TAB não entra no texto, ao invés disso, pula pro próximo campo
+    write_tab: False
