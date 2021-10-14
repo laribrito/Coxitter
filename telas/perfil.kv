@@ -47,15 +47,28 @@
                     cols: 2
                     height: 100
                     BoxLayout:
+                        size_hint_x: .92
                         orientation: 'vertical'
                         Label:
                             text:'x seguidores'
                         Label:
                             text:'y seguindo'
                     BoxLayout:
+                        size_hint_x: .3
+                        #regula o tamanho do botão Sair
+                        GridLayout:
+                            cols: 3
+                            Label:
+                                size_hint_x: .5
+                            Button:
+                                size_hint_x: '48px'
+                                background_normal: 'telas/imagens/engrenagem.png'
+                                height: 48
+                                background_down: 'telas/imagens/engrenagem_albina.png'
+                            Label:
+                                size_hint_x: .5
                         Button:
-                            background_normal: 'telas/imagens/engrenagem.png'
-                        Button:
+                            position: self.center
                             text:'Sair'
                             font_name: 'telas/fontes/lastica.ttf'
                             background_color: "#A3C0FF"
