@@ -15,6 +15,9 @@ class MyApp(App):
         from telaMudarFoto import MudarFoto
         sm.add_widget(MudarFoto(name="mudarFoto"))
         
+        
+        from telaMudarBio import MudarBio
+        sm.add_widget(MudarBio(name="mudarBio"))
 
         return sm
 

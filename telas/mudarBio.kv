@@ -1,0 +1,52 @@
+#:kivy 2.0
+<label>:
+    font_name: 'lastica.ttf'
+    font_size: '20sp'
+
+<MudarBio>:
+    ScrollView:
+        BoxLayout:
+            padding: 0
+            spacing: 0
+            BoxLayout:
+                padding: 0
+                spacing: 0
+                size_hint_x: 1
+                Image:
+                    size_hint_y: None
+                    height: self.texture_size[1] - dp(20)
+                    source: 'telas/imagens/loginTopo.png'
+                    allow_stretch: True
+                    keep_ratio: False
+            GridLayout:
+                cols:1
+                padding: (0, 90)
+                BoxLayout:
+                    spacing: 40
+                    Label:
+                        text: "Alterar [color=3662f6]bio[/color]:"
+                        size_hint_x: 1
+                        color: 0 , 0 , 0 , 1
+                        markup: True
+                    TextInput:
+                        multiline: True
+                        height: self.line_height + dp(100)
+                    GridLayout:
+                        cols: 2
+                        spacing: 20
+                        Botao:
+                            text: "Confirmar"
+                        BotaoVoltar:
+            
+            BoxLayout:
+                padding: 0
+                spacing: 0
+                size_hint_x: 1
+                Image:
+                    size_hint_y: None
+                    height: self.texture_size[1] - dp(20)
+                    source: 'telas/imagens/loginBaixo.png'
+                    allow_stretch: True
+                    keep_ratio: False
+                        
+                        
