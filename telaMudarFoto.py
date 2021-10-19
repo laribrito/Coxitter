@@ -21,7 +21,7 @@ Builder.load_file('telas/mudarFoto.kv')
 '''
 Classe TelaAbreFoto
 '''
-class MudarTela(Screen):
+class MudarFoto(Screen):
 
     # Elementos de interface
     lb_msg = ObjectProperty(None)

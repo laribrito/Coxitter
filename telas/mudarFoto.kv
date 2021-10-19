@@ -7,7 +7,12 @@
 <MudarFoto>:
     lb_msg: lb_msg
     escolha_arquivo: escolha_arquivo
-
+    canvas.before:
+        Color:
+            rgba: .98, .98, .98, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
     BoxLayout:
         size_hint_y: 1
 
@@ -23,15 +28,22 @@
             size_hint_y: 1
             cols: 2
             padding: 0
+            spacing: 20
 
             Button:
                 size_hint_y: 1
                 text: 'OK'
+                background_color: "#A3C0FF"
+                color: .2, .2, .2,1
+                background_normal: ""
                 on_press: root.carregar_foto(escolha_arquivo.path, escolha_arquivo.selection)
 
             Button:
                 size_hint_y: 1
-                text: 'Cancelar'
+                text: "Cancelar"
+                background_color: "#A3C0FF"
+                color: .2, .2, .2,1
+                background_normal: ""
                 on_press:
+                    root.manager.current = 'config'
                     root.manager.transition.direction = 'right'
-                    root.manager.current = 'perfil'
