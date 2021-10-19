@@ -5,110 +5,106 @@
     font_size: '20sp'
 
 <Cadastro>:
-    BoxLayout:
-        canvas.before:
-            Color:
-                rgba: .98, .98, .98, 1
-            Rectangle:
-                pos: self.pos
-                size: self.size
-        orientation: 'vertical'
+    ScrollView:
         BoxLayout:
-            canvas.before:
-                Rectangle:
+            padding: 0
+            spacing: 0
+            BoxLayout:
+                padding: 0
+                spacing: 0
+                size_hint_x: 1
+                Image:
+                    height: self.texture_size[1] - dp(20)
                     source: 'telas/imagens/loginTopo.png'
-                    pos: self.pos
-                    size: self.size
-            size_hint: 1, 0.3
-            Label:
-                text: "Cadastro COXITER \nAdentre nessa delicia!"
-                halign: 'center'
-                size_hint: 1, 1
-                color: 0 , 0 , 0 , 1
-                markup: True
-        BoxLayout:
-            orientation: 'vertical'
-            padding: 20
-            spacing: 10
-            Label:
-                text: "Insira seu [color=3662f6]nome[/color]:"
-                size_hint: 1, 0.5
-                color: 0 , 0 , 0 , 1
-                markup: True
-            GridLayout:
-                cols: 3
-                size_hint_y: 0.5
+                    allow_stretch: True
+                    keep_ratio: False
+            BoxLayout:
+                padding: (0, 50, 0, 50)
+                spacing: 50
                 Label:
-                    size_hint_x: 0.05
-                TextInput:
-                Label:
-                    size_hint_x: 0.05
-                
-            Label:
-                text: "Insira seu [color=3662f6]usuario[/color]:"
-                size_hint: 1, 0.5
-                color: 0 , 0 , 0 , 1
-                markup: True
-            GridLayout:
-                cols: 3
-                size_hint_y: 0.5
-                Label:
-                    size_hint_x: 0.05
-                TextInput:
-                Label:
-                    size_hint_x: 0.05
-                
-            Label:
-                text: "Insira sua [color=3662f6]senha[/color]:"
-                size_hint: 1, 0.5
-                color: 0 , 0 , 0 , 1
-                markup: True
-            GridLayout:
-                cols: 3
-                size_hint_y: 0.5
-                Label:
-                    size_hint_x: 0.05
-                TextInput:
-                Label:
-                    size_hint_x: 0.05
-                
-            Label:
-                text: "[color=3662f6]Repita[/color] sua [color=3662f6]senha[/color]:"
-                size_hint: 1, 0.5
-                color: 0 , 0 , 0 , 1
-                markup: True
-            GridLayout:
-                cols: 3
-                size_hint_y: 0.5
-                Label:
-                    size_hint_x: 0.05
-                TextInput:
-                Label:
-                    size_hint_x: 0.05
-                
-            GridLayout:
-                cols: 2
-                spacing: 10
-                size_hint_y: 0.5
-                Button:
-                    text: "Voltar"
-                    size_hint_x: 0.6
-                    background_color: "#B2C5ED"
-                    background_normal: ""
-                    color: .2, .2, .2,1
-                    on_press:
-                        root.manager.current = "login"
-                        root.manager.transition.direction = 'right'
-                Button:
-                    text: "Cadastrar"
-                    size_hint_x: 1
-                    background_color: "#A3C0FF"
-                    background_normal: ""
-                    color: .2, .2, .2,1
-        BoxLayout:
-            size_hint: 1, 0.2
-            Image:
-                source: 'telas/imagens/loginBaixo.png'
-                size: self.texture_size
-                allow_stretch: True
-                keep_ratio: False
+                    text: "Cadastro COXITER \nAdentre nessa delicia!"
+                    halign: 'center'
+                    color: 0 , 0 , 0 , 1
+                    markup: True
+                BoxLayout:
+                    orientation: 'vertical'
+                    padding: 20
+                    spacing: 10
+                    Label:
+                        text: "Insira seu [color=3662f6]nome[/color]:"
+                        color: 0 , 0 , 0 , 1
+                        markup: True
+                    GridLayout:
+                        cols: 3
+                        Label:
+                            size_hint_x: 0.05
+                        TextInput:
+                        Label:
+                            size_hint_x: 0.05
+                        
+                    Label:
+                        text: "Insira seu [color=3662f6]usuario[/color]:"
+                        color: 0 , 0 , 0 , 1
+                        markup: True
+                    GridLayout:
+                        cols: 3
+                        Label:
+                            size_hint_x: 0.05
+                        TextInput:
+                        Label:
+                            size_hint_x: 0.05
+                        
+                    Label:
+                        text: "Insira sua [color=3662f6]senha[/color]:"
+                        color: 0 , 0 , 0 , 1
+                        markup: True
+                    GridLayout:
+                        cols: 3
+                        Label:
+                            size_hint_x: 0.05
+                        TextInput:
+                        Label:
+                            size_hint_x: 0.05
+                        
+                    Label:
+                        text: "[color=3662f6]Repita[/color] sua [color=3662f6]senha[/color]:"
+                        color: 0 , 0 , 0 , 1
+                        markup: True
+                    GridLayout:
+                        cols: 3
+                        Label:
+                            size_hint_x: 0.05
+                        TextInput:
+                        Label:
+                            size_hint_x: 0.05
+                        
+                    GridLayout:
+                        cols: 2
+                        spacing: 10
+                        Button:
+                            text: "Voltar"
+                            size_hint_x: 0.6
+                            background_color: "#B2C5ED"
+                            background_normal: ""
+                            color: .2, .2, .2,1
+                            on_press:
+                                root.manager.current = "login"
+                                root.manager.transition.direction = 'right'
+                        Button:
+                            text: "Cadastrar"
+                            size_hint_x: 1
+                            background_color: "#A3C0FF"
+                            background_normal: ""
+                            color: .2, .2, .2,1
+                            on_press:
+                                root.manager.current = "login"
+                                root.manager.transition.direction = 'right'
+                BoxLayout:
+                    padding: 0
+                    spacing: 0
+                    Image:
+                        height: self.texture_size[1] - dp(20)
+                        source: 'telas/imagens/loginBaixo.png'
+                        size: self.texture_size
+                        allow_stretch: True
+                        keep_ratio: False
