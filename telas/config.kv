@@ -1,0 +1,78 @@
+#:kivy 2.0
+#:include telas/widgets_confi.kv
+<Label>:
+    font_name: 'telas/fontes/lastica.ttf'
+    font_size: '15sp'
+
+<Config>:
+    ScrollView:
+        BoxLayout:
+            padding: 0
+            spacing: 0
+            BoxLayout:
+                padding: 0
+                spacing: 0
+                size_hint_x: 1
+                Image:
+                    size_hint_y: None
+                    height: self.texture_size[1] - dp(20)
+                    source: 'telas/imagens/loginTopo.png'
+                    allow_stretch: True
+                    keep_ratio: False
+            BoxLayout:
+                orientation: 'vertical'
+                padding: 20
+                spacing: 30
+
+                Label:
+                    text: "[size=25]Configuracoes de Conta:[/size]"
+                    markup: True
+                    color: 0 , 0 , 0 , 1
+                    halign: "left"
+                    veling: "center"
+                    text_size: root.width, None
+                    padding_x: 20
+
+                    #padding_y: 40
+                Button:
+                    text: "Editar Foto de Perfil"
+                    background_color: "##A3C0FF"
+                    background_normal: ""
+                    color: .2, .2, .2,1
+                    on_press:
+                        root.manager.current = 'mudarFoto'
+                        root.manager.transition.direction = 'left'
+                Button:
+                    text: "Editar Nome de Perfil"
+                    background_color: "##A3C0FF"
+                    background_normal: ""
+                    color: .2, .2, .2,1
+                    on_press:
+                        root.manager.current = 'perfil'
+                        root.manager.transition.direction = 'left'
+                Button:
+                    text: "Editar Senha"
+                    background_color: "##A3C0FF"
+                    background_normal: ""
+                    color: .2, .2, .2,1
+                    on_press:
+                        root.manager.current = 'perfil'
+                        root.manager.transition.direction = 'left'
+                Button:
+                    text: "Editar Bio"
+                    background_color: "##A3C0FF"
+                    background_normal: ""
+                    color: .2, .2, .2,1
+                    on_press:
+                        root.manager.current = 'mudarBio'
+                        root.manager.transition.direction = 'left'
+                Button:
+                    text: "Voltar"
+                    background_color: "##A3C0FF"
+                    background_normal: ""
+                    color: .2, .2, .2,1
+                    on_press:
+                        root.manager.current = 'perfil'
+                        root.manager.transition.direction = 'left'
+
+                Label:

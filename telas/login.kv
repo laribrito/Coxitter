@@ -3,6 +3,7 @@
 <Label>:
     font_name: 'telas/fontes/lastica.ttf'
     font_size: '20sp'
+
 <Login>:
     ScrollView:
         BoxLayout:
@@ -63,7 +64,7 @@
                         color: .2, .2, .2,1
                         background_normal: ""
                         on_press:
-                            root.manager.current = 'mudarFoto'
+                            root.manager.current = 'perfil'
                             root.manager.transition.direction = 'left'
                     Label:
                         size_hint_x: 0.2

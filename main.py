@@ -14,7 +14,8 @@ class MyApp(App):
         sm.add_widget(Perfil(name='perfil'))
         from telaMudarFoto import MudarFoto
         sm.add_widget(MudarFoto(name="mudarFoto"))
-        
+        from telaconfig import Config
+        sm.add_widget(Config(name='config'))
 
         return sm
 

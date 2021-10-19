@@ -63,8 +63,11 @@
                             Button:
                                 size_hint_x: '48px'
                                 background_normal: 'telas/imagens/engrenagem.png'
-                                height: 48
+                                height: 52
                                 background_down: 'telas/imagens/engrenagem_albina.png'
+                                on_press:
+                                    root.manager.current = 'config'
+                                    root.manager.transition.direction = 'left'
                             Label:
                                 size_hint_x: .5
                         Button:
