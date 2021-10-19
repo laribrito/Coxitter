@@ -5,6 +5,12 @@
     # Rolagem apenas na vertical
     do_scroll_x: False
     do_scroll_y: True
+    canvas.before:
+        Color:
+            rgba: .98, .98, .98, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
 
 <BoxLayout>
     # Altura variável
@@ -26,8 +32,8 @@
     size_hint_y: None
     height: self.texture_size[1]
     # Alinha à esquerda
-    text_size: root.width, None
-    halign: 'left'
+    #text_size: root.width, None
+    halign: 'center'
     # Aceita marcação
     markup: True
 

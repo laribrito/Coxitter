@@ -1,88 +1,89 @@
 #:kivy 2.0
-#:include telas/widgets_config.kv
+#:include telas/widgets_confi.kv
 <Label>:
     font_name: 'telas/fontes/lastica.ttf'
     font_size: '20sp'
 <Login>:
-    BoxLayout:
-        canvas.before:
-            Color:
-                rgba: .98, .98, .98, 1
-            Rectangle:
-                pos: self.pos
-                size: self.size
-        orientation: 'vertical'
+    ScrollView:
         BoxLayout:
-            size_hint: 1, 0.2
-            Image:
-                source: 'telas/imagens/loginTopo.png'
-                size: self.texture_size
-                allow_stretch: True
-                keep_ratio: False
-        BoxLayout:
-            orientation: 'vertical'
-            padding: 20
-            spacing: 10
-            Label:
-                text: "COXITTER"
-                font_size: '25sp'
-                size_hint: 1, 0.5
-                color: 0 , 0 , 0 , 1
-            Label:
-                text: "Login:"
-                size_hint: 1, 0.5
-                color: 0 , 0 , 0 , 1
-            GridLayout:
-                cols: 3
-                size_hint_y: 0.5
+            padding: 0
+            spacing: 0
+            BoxLayout:
+                padding: 0
+                spacing: 0
+                size_hint_x: 1
+                Image:
+                    size_hint_y: None
+                    height: self.texture_size[1] - dp(20)
+                    source: 'telas/imagens/loginTopo.png'
+                    allow_stretch: True
+                    keep_ratio: False
+            BoxLayout:
+                padding: (0, 50, 0, 50)
+                spacing: 50
                 Label:
-                    size_hint_x: 0.05
-                TextInput:
+                    text: "COXITTER"
+                    font_size: '25sp'
+                    size_hint: 1, 0.5
+                    color: 0 , 0 , 0 , 1
                 Label:
-                    size_hint_x: 0.05
-    
-            Label:
-                text: "Senha:"
-                size_hint: 1, 0.5
-                color: 0 , 0 , 0 , 1
-            GridLayout:
-                cols: 3
-                size_hint_y: 0.5
-                Label:
-                    size_hint_x: 0.05
-                TextInput:
-                Label:
-                    size_hint_x: 0.05
-                
-            GridLayout:
-                cols: 3
-                size_hint_y: 0.5
-                Label:
-                    size_hint_x: 0.2
-                Button:
-                    text: "Entrar"
-                    background_color: "#A3C0FF"
-                    color: .2, .2, .2,1
-                    background_normal: ""
-                    on_press:
-                        root.manager.current = 'perfil'
-                        root.manager.transition.direction = 'left'
-                Label:
-                    size_hint_x: 0.2
-            Label:
-                markup: True
-                text: "[font=telas/fontes/NewsCycle.ttf]Nao tem uma conta? [ref=cadastro][color=3662f6]Cadastre-se![/color][/ref][/font]"
-                font_size: '15sp'
-                size_hint: 1, 0.5
-                color: .2, .2, .2,1
-                on_ref_press:
-                    root.manager.current = args[1]
-                    root.manager.transition.direction = 'left'
+                    text: "Login:"
+                    size_hint: 1, 0.5
+                    color: 0 , 0 , 0 , 1
+                GridLayout:
+                    cols: 3
+                    
+                    Label:
+                        size_hint_x: 0.05
+                    TextInput:
+                    Label:
+                        size_hint_x: 0.05
         
-        BoxLayout:
-            size_hint: 1, 0.2
-            Image:
-                source: 'telas/imagens/loginBaixo.png'
-                size: self.texture_size
-                allow_stretch: True
-                keep_ratio: False
+                Label:
+                    text: "Senha:"
+                    size_hint: 1, 0.5
+                    color: 0 , 0 , 0 , 1
+                GridLayout:
+                    cols: 3
+                
+                    Label:
+                        size_hint_x: 0.05
+                    TextInput:
+                    Label:
+                        size_hint_x: 0.05
+                    
+                GridLayout:
+                    cols: 3
+                    
+                    Label:
+                        size_hint_x: 0.2
+                    Button:
+                        text: "Entrar"
+                        background_color: "#A3C0FF"
+                        color: .2, .2, .2,1
+                        background_normal: ""
+                        on_press:
+                            root.manager.current = 'perfil'
+                            root.manager.transition.direction = 'left'
+                    Label:
+                        size_hint_x: 0.2
+                Label:
+                    markup: True
+                    text: "[font=telas/fontes/NewsCycle.ttf]Nao tem uma conta? [ref=cadastro][color=3662f6]Cadastre-se![/color][/ref][/font]"
+                    font_size: '15sp'
+                    size_hint: 1, 0.5
+                    color: .2, .2, .2,1
+                    on_ref_press:
+                        root.manager.current = args[1]
+                        root.manager.transition.direction = 'left'
+            
+            BoxLayout:
+                padding: 0
+                spacing: 0
+                size_hint_x: 1
+                Image:
+                    size_hint_y: None
+                    height: self.texture_size[1] - dp(20)
+                    source: 'telas/imagens/loginBaixo.png'
+                    allow_stretch: True
+                    keep_ratio: False
