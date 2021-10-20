@@ -36,6 +36,9 @@
                         spacing: 20
                         Botao:
                             text: "Confirmar"
+                            on_press:
+                                root.manager.current = 'perfil'
+                                root.manager.transition.direction = 'left'
                         BotaoVoltar:
                             on_press:
                                 root.manager.current = 'config'

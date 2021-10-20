@@ -23,6 +23,9 @@ class MyApp(App):
 
         from telamudarSenha import MudarSenha
         sm.add_widget(MudarSenha(name='mudarSenha'))
+
+        from telamudarNome import MudarNome
+        sm.add_widget(MudarNome(name='mudarNome'))
         return sm
 
 if __name__ == '__main__':
