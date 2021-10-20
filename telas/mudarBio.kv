@@ -37,6 +37,9 @@
                         Botao:
                             text: "Confirmar"
                         BotaoVoltar:
+                            on_press:
+                                root.manager.current = 'config'
+                                root.manager.transition.direction = 'left'
             
             BoxLayout:
                 padding: 0

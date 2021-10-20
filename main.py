@@ -13,13 +13,16 @@ class MyApp(App):
         from telaperfil import Perfil
         sm.add_widget(Perfil(name='perfil'))
         from telaMudarFoto import MudarFoto
-        sm.add_widget(MudarFoto(name="mudarFoto"))
+        sm.add_widget(MudarFoto(name='mudarFoto'))
 
         from telaconfig import Config
         sm.add_widget(Config(name='config'))        
         
         from telaMudarBio import MudarBio
-        sm.add_widget(MudarBio(name="mudarBio"))
+        sm.add_widget(MudarBio(name='mudarBio'))
+
+        from telamudarSenha import MudarSenha
+        sm.add_widget(MudarSenha(name='mudarSenha'))
         return sm
 
 if __name__ == '__main__':

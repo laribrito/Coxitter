@@ -1,0 +1,56 @@
+#:kivy 2.0
+#:include telas/widgets_confi.kv
+<label>:
+    font_name: 'lastica.ttf'
+    font_size: '20sp'
+
+<MudarSenha>:
+    ScrollView:
+        BoxLayout:
+            padding: 0
+            spacing: 0
+            BoxLayout:
+                padding: 0
+                spacing: 0
+                size_hint_x: 1
+                Image:
+                    size_hint_y: None
+                    height: self.texture_size[1] - dp(20)
+                    source: 'telas/imagens/loginTopo.png'
+                    allow_stretch: True
+                    keep_ratio: False
+            BoxLayout:
+                orientation: 'vertical'
+                padding: 20
+                spacing: 20
+                Label:
+                    markup: True
+                    text:"[font_context= lastica.ttf]Editando Perfil[/font]"
+                    color: 0 , 0 , 0 , 1
+                Label:
+                    text: "[b]Alterar [color=3662f6]Senha[/color] :[/b]"
+                    color: 0 , 0 , 0 , 1
+                    markup: True
+                TextInput:
+                Label:
+                    text: "[b]Repita a [color=3662f6]Senha[/color] :[/b]"
+                    color: 0 , 0 , 0 , 1
+                    markup: True
+                TextInput:
+                Botao:
+                    text: "Confirmar"            
+                    on_press:
+                        root.manager.current = 'login'
+                        root.manager.transition.direction = 'left'
+                GridLayout:
+                    colls: 3
+                    Label:
+                        size_hint_x: .2
+                    BotaoVoltar:
+                        on_press:
+                            root.manager.current = 'config'
+                            root.manager.transition.direction = 'left'
+                        size_hint_x: .6
+                    Label:
+                        size_hint_x: .2
+
