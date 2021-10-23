@@ -21,7 +21,7 @@
                     keep_ratio: False
             BoxLayout:
                 orientation: 'vertical'
-                padding: (20, 90)
+                padding: 20
                 spacing: 20
                 Label:
                     markup: True
@@ -43,13 +43,13 @@
                         root.manager.current = 'login'
                         root.manager.transition.direction = 'left'
                 GridLayout:
-                    cols: 3
+                    colls: 3
                     Label:
                         size_hint_x: .2
                     BotaoVoltar:
                         on_press:
                             root.manager.current = 'config'
-                            root.manager.transition.direction = 'right'
+                            root.manager.transition.direction = 'left'
                         size_hint_x: .6
                     Label:
                         size_hint_x: .2
