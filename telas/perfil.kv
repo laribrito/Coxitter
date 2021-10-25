@@ -9,6 +9,8 @@
     #Widgets que serão trabalhados pelo arquivo .py
     setLogin: setLogin
     setNome: setNome
+    setFoto: setFoto
+
     ScrollView:
         canvas.before:
             Color:
@@ -30,8 +32,9 @@
                     cols: 2
                     padding: 20
                     
-                    Image:
-                        source:"telas/imagens/padrao.png"
+                    AsyncImage:
+                        id: setFoto
+                        # source:"telas/imagens/padrao.png"
                         allow_stretch: True
                         height: self.texture_size[1] + dp(50)
                         size_hint_y: 0.4

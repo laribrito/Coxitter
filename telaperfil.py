@@ -13,6 +13,8 @@ class Perfil(Screen):
     #Elementos da tela .kv
     setNome = ObjectProperty(None)
     setLogin = ObjectProperty(None)
+    setFoto = ObjectProperty(None)
+
     def retornaPerfil(self, login):
         UrlRequest(f'http://127.0.0.1:5000/api/perfil/{login}',
                 req_headers = {
@@ -22,13 +24,13 @@ class Perfil(Screen):
                 on_error = self.erro,
             )
 
-            # UrlRequest(f"{AppConfig.servidor}/api/foto/{login}",
-            #     req_headers = {
-            #         'Authorization': f'Bearer {AppConfig.get_config("token")}'
-            #     },
-            #     on_success = self.foto_sucesso,
-            #     on_error = self.erro,
-            # )
+        UrlRequest(f"http://127.0.0.1:5000/api/foto/{login}",
+            req_headers = {
+                'Authorization': f'Bearer {AppConfig.get_config("token")}'
+            },
+            on_success = self.foto_sucesso,
+            on_error = self.erro,
+        )
     
     '''
     Recebe a resposta da requisição do perfil.
@@ -52,4 +54,9 @@ class Perfil(Screen):
         self.setNome.text = ''
         self.setLogin.text = 'Erro.'
 
+    def foto_sucesso(self, req, resposta):
+        if (resposta['status'] == 0):
+            # Atualiza a foto na interface
+            self.setFoto.source = resposta['url']
+            self.setFoto.reload()
 
