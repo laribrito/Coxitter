@@ -1,2 +1,5 @@
 #pasta de cache do python
 __pycache__
+
+#configuração padrão do aplicativo é sem o arquivo de config.json
+config.json

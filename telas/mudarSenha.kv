@@ -21,7 +21,7 @@
                     keep_ratio: False
             BoxLayout:
                 orientation: 'vertical'
-                padding: 20
+                padding: 20, 90
                 spacing: 20
                 Label:
                     markup: True
@@ -41,15 +41,15 @@
                     text: "Confirmar"            
                     on_press:
                         root.manager.current = 'login'
-                        root.manager.transition.direction = 'left'
+                        root.manager.transition.direction = 'right'
                 GridLayout:
-                    colls: 3
+                    cols: 3
                     Label:
                         size_hint_x: .2
                     BotaoVoltar:
                         on_press:
                             root.manager.current = 'config'
-                            root.manager.transition.direction = 'left'
+                            root.manager.transition.direction = 'right'
                         size_hint_x: .6
                     Label:
                         size_hint_x: .2
