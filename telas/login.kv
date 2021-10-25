@@ -5,6 +5,10 @@
     font_size: '20sp'
 
 <Login>:
+    #Widgets que serão usados no arquivo .py
+    setMensagem: setMensagem
+    getLogin: getLogin
+    
     ScrollView:
         BoxLayout:
             padding: 0
@@ -37,6 +41,7 @@
                     Label:
                         size_hint_x: 0.05
                     TextInput:
+                        id: getLogin
                     Label:
                         size_hint_x: 0.05
         
@@ -50,9 +55,14 @@
                     Label:
                         size_hint_x: 0.05
                     TextInput:
+                        id: getSenha
+                        password: True
                     Label:
                         size_hint_x: 0.05
-                    
+                
+                Mensagem:
+                    id: setMensagem
+                    font_name: "telas/fontes/NewsCycle.ttf"
                 GridLayout:
                     cols: 3
                     
@@ -64,8 +74,7 @@
                         color: .2, .2, .2,1
                         background_normal: ""
                         on_press:
-                            root.manager.current = 'perfil'
-                            root.manager.transition.direction = 'left'
+                            root.entrar(getLogin.text,getSenha.text)
                     Label:
                         size_hint_x: 0.2
                 Label:

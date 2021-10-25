@@ -5,6 +5,9 @@
     font_size: '20sp'
 
 <Cadastro>:
+    #Widgets que serão usados no arquivo .py
+    setMensagem: setMensagem
+
     ScrollView:
         BoxLayout:
             padding: 0
@@ -39,6 +42,7 @@
                         Label:
                             size_hint_x: 0.05
                         TextInput:
+                            id: getNome
                         Label:
                             size_hint_x: 0.05
                         
@@ -51,6 +55,7 @@
                         Label:
                             size_hint_x: 0.05
                         TextInput:
+                            id: getLogin
                         Label:
                             size_hint_x: 0.05
                         
@@ -63,6 +68,8 @@
                         Label:
                             size_hint_x: 0.05
                         TextInput:
+                            id: getSenha1
+                            password: True
                         Label:
                             size_hint_x: 0.05
                         
@@ -75,9 +82,13 @@
                         Label:
                             size_hint_x: 0.05
                         TextInput:
+                            id: getSenha2
+                            password: True
                         Label:
                             size_hint_x: 0.05
-                        
+                    Mensagem:
+                        id: setMensagem
+                        font_name: "telas/fontes/NewsCycle.ttf"
                     GridLayout:
                         cols: 2
                         spacing: 10
@@ -97,8 +108,7 @@
                             background_normal: ""
                             color: .2, .2, .2,1
                             on_press:
-                                root.manager.current = "login"
-                                root.manager.transition.direction = 'right'
+                                root.cadastrar(getLogin.text, getNome.text, getSenha1.text, getSenha2.text)
                 BoxLayout:
                     padding: 0
                     spacing: 0

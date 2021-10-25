@@ -6,6 +6,9 @@
     color: 0,0,0,1
 
 <Perfil>:
+    #Widgets que serão trabalhados pelo arquivo .py
+    setLogin: setLogin
+    setNome: setNome
     ScrollView:
         canvas.before:
             Color:
@@ -35,14 +38,16 @@
                     BoxLayout:
                         orientation: 'vertical'
                         Label:
-                            text:'Laribrito'
+                            id: setNome
+                            text:' '
                         Label:
-                            text:'@larila'
+                            id: setLogin
+                            text:' '
             
             BoxLayout:
                 orientation: 'vertical'
-                Label:
-                    text: "Biografia..."
+                # Label:
+                #     text: "Biografia..."
                 GridLayout:
                     cols: 2
                     height: 100
