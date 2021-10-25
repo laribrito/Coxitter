@@ -29,6 +29,7 @@
                         color: 0 , 0 , 0 , 1
                         markup: True
                     TextInput:
+                        id: getBio
                         multiline: True
                         height: self.line_height + dp(100)
                     GridLayout:
@@ -37,8 +38,7 @@
                         Botao:
                             text: "Confirmar"
                             on_press:
-                                root.manager.current = 'perfil'
-                                root.manager.transition.direction = 'left'
+                                root.mudarbio(getBio.text)
                         BotaoVoltar:
                             on_press:
                                 root.manager.current = 'config'

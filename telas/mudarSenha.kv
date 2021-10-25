@@ -32,16 +32,22 @@
                     color: 0 , 0 , 0 , 1
                     markup: True
                 TextInput:
+                    id: getSenha1
                 Label:
                     text: "[b]Repita a [color=3662f6]Senha[/color] :[/b]"
                     color: 0 , 0 , 0 , 1
                     markup: True
                 TextInput:
+                    id: getSenha2
+
+                Mensagem:
+                    id: setMensagem
+                    font_name: "telas/fontes/NewsCycle.ttf"
+                
                 Botao:
                     text: "Confirmar"            
                     on_press:
-                        root.manager.current = 'login'
-                        root.manager.transition.direction = 'left'
+                        root.mudarsenha(getSenha1.text,getSenha2.text)
                 GridLayout:
                     colls: 3
                     Label:
