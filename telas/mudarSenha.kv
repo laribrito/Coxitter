@@ -5,6 +5,7 @@
     font_size: '20sp'
 
 <MudarSenha>:
+    setMensagem: setMensagem
     ScrollView:
         BoxLayout:
             padding: 0
@@ -33,15 +34,17 @@
                     markup: True
                 TextInput:
                     id: getSenha1
+                    password: True
                 Label:
                     text: "[b]Repita a [color=3662f6]Senha[/color] :[/b]"
                     color: 0 , 0 , 0 , 1
                     markup: True
                 TextInput:
                     id: getSenha2
-
+                    password: True
                 Mensagem:
                     id: setMensagem
+                    color: 0,0,0,1
                     font_name: "telas/fontes/NewsCycle.ttf"
                 
                 Botao:

@@ -5,7 +5,7 @@
 ################################################################################
 
 <MudarFoto>:
-    lb_msg: lb_msg
+    setMensagem: setMensagem
     escolha_arquivo: escolha_arquivo
     canvas.before:
         Color:
@@ -21,8 +21,10 @@
             size_hint_y: 9
         
         Label:
-            id: lb_msg
+            id: setMensagem
             size_hint_y: 0.5
+            color: 0,0,0,1
+            font_name: "telas/fontes/NewsCycle.ttf"
 
         GridLayout:
             size_hint_y: 1

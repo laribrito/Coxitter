@@ -52,11 +52,26 @@ class Perfil(Screen):
     '''
     def erro(self, req, erro):
         self.setNome.text = ''
-        self.setLogin.text = 'Erro.'
+        self.setLogin.text = 'Não foi possível conectar ao servidor.\nTente novamente mais tarde.'
 
     def foto_sucesso(self, req, resposta):
         if (resposta['status'] == 0):
             # Atualiza a foto na interface
             self.setFoto.source = resposta['url']
             self.setFoto.reload()
+    
+    def sair(self):
+        UrlRequest(f'http://127.0.0.1:5000/api/sair',
+            req_headers = {
+                'Authorization': f'Bearer {AppConfig.get_config("token")}'
+            },
+            on_success = self.saida_sucesso,
+            on_error = self.erro,
+        )
+        AppConfig.set_config('token', None)
+        
+    def saida_sucesso(self, req, resposta):
+        if (resposta['status'] == 0):
+            self.manager.transition.direction = 'right'
+            self.manager.current = 'login'
 

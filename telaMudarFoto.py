@@ -18,13 +18,12 @@ import os
 # Carrega a interface
 Builder.load_file('telas/mudarFoto.kv')
 
-'''
-Classe TelaAbreFoto
-'''
+#importa o appConfig
+from appConfig import AppConfig
 class MudarFoto(Screen):
 
     # Elementos de interface
-    lb_msg = ObjectProperty(None)
+    setMensagem = ObjectProperty(None)
     escolha_arquivo = ObjectProperty(None)
 
     '''
@@ -35,6 +34,8 @@ class MudarFoto(Screen):
             self.escolha_arquivo.rootpath = '/home'
         elif platform == 'android':
             self.escolha_arquivo.rootpath = '/storage/emulated/0'
+        # elif platform == 'windows':
+        #     self.escolha_arquivo.rootpath = 'C://'
 
     '''
     Envia uma requisição do perfil via método GET.
@@ -46,7 +47,7 @@ class MudarFoto(Screen):
         try:
             arq = open(os.path.join(pasta, arquivo[0]), 'rb')
 
-            UrlRequest(f'{AppConfig.servidor}/api/foto/{AppConfig.get_config("login")}',
+            UrlRequest(f'http://127.0.0.1:5000/api/foto/{AppConfig.get_config("login")}',
                 req_headers = {
                     'Authorization': f'Bearer {AppConfig.get_config("token")}',
                 },
@@ -57,7 +58,7 @@ class MudarFoto(Screen):
 
             arq.close()
         except IndexError:
-            self.lb_msg.text = 'Você precisa selecionar um arquivo.'
+            self.setMensagem.text = 'Você precisa selecionar um arquivo.'
 
     '''
     Recebe a resposta do envio da foto.
@@ -70,13 +71,13 @@ class MudarFoto(Screen):
             # Transiciona para a tela de perfil
             self.manager.transition.direction = 'right'
             self.manager.current = 'perfil'
-            self.manager.current_screen.carregar_perfil(AppConfig.get_config('login'))
+            self.manager.current_screen.retornaPerfil(AppConfig.get_config('login'))
         else:
             # Exibe a mensagem de erro na resposta
-            self.lb_msg.text = resposta['msg']
+            self.setMensagem.text = resposta['msg']
 
     '''
     Efetua o tratamento em caso de erro ao efetuar a requisição.
     '''
     def erro(self, req, erro):
-        self.lb_msg = 'Erro.'
+        self.setMensagem = 'Não foi possível conectar ao servidor.\nTente novamente mais tarde.'
