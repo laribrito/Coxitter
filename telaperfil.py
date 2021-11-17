@@ -3,7 +3,7 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen
 from kivy.network.urlrequest import UrlRequest
 from kivy.properties import ObjectProperty
-
+from menu import Menu
 Builder.load_file("telas/perfil.kv")
 
 #class appConfig
@@ -42,6 +42,8 @@ class Perfil(Screen):
             # Exibe os dados do perfil na interface
             self.setNome.text =  resposta['nome'] 
             self.setLogin.text = f'@{resposta["login"]}'
+            menu = Menu.criar()
+            self.add_widget(menu)
         else:
             # Exibe a mensagem de erro na resposta
             self.setNome.text = ''
