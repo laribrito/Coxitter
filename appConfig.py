@@ -14,7 +14,7 @@ import json
 
 class AppConfig:
     config = {}
-
+    manager = None
     '''
     Carrega a configuração do arquivo JSON.
 
@@ -52,7 +52,7 @@ class AppConfig:
         try:
             return AppConfig.config[chave]
         except KeyError:
-            return ""
+            return None
     
     '''
     Altera um item de configuração.

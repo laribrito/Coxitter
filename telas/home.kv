@@ -1,0 +1,49 @@
+#:kivy 2.0
+#:include telas/widgets_confi.kv
+<Label>:
+    font_name: 'telas/fontes/lastica.ttf'
+    font_size: '15sp'
+
+<Home>:
+    ScrollView:
+        BoxLayout:
+            padding: 0
+            spacing: 0
+            BoxLayout:
+                padding: 0
+                spacing: 0
+                size_hint_x: 1
+                Image:
+                    size_hint_y: None
+                    height: self.texture_size[1] - dp(20)
+                    source: 'telas/imagens/loginTopo.png'
+                    allow_stretch: True
+                    keep_ratio: False
+            BoxLayout:
+                orientation: 'vertical'
+                padding: 20
+                spacing: 30
+
+                Label:
+                    text: "[size=25]Eu sou o home:[/size]"
+                    markup: True
+                    color: 0 , 0 , 0 , 1
+                    halign: "left"
+                    veling: "center"
+                    text_size: root.width, None
+                    padding_x: 20
+
+                   
+                GridLayout:
+                    cols: 3
+                    Label:
+                        size_hint_x: .2
+                    BotaoVoltar:
+                        on_press:
+                            root.manager.current = 'perfil'
+                            root.manager.transition.direction = 'right'
+                        size_hint_x:.6
+                    Label:
+                        size_hint_x: .2
+
+                Label:

@@ -36,6 +36,12 @@ class MyApp(App):
         sm.add_widget(MudarSenha(name='mudarSenha'))
         from telamudarNome import MudarNome
         sm.add_widget(MudarNome(name='mudarNome'))
+        from telahome import Home
+        sm.add_widget(Home(name='home'))
+        from telapesquisar import Pesquisar
+        sm.add_widget(Pesquisar(name='pesquisar'))
+
+        AppConfig.manager = sm 
 
         return sm
 

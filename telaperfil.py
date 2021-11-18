@@ -42,7 +42,8 @@ class Perfil(Screen):
             # Exibe os dados do perfil na interface
             self.setNome.text =  resposta['nome'] 
             self.setLogin.text = f'@{resposta["login"]}'
-            menu = Menu.criar()
+            # Adiciona o menu a tela
+            menu = Menu.criar(2)
             self.add_widget(menu)
         else:
             # Exibe a mensagem de erro na resposta
