@@ -6,12 +6,18 @@
     color: 0,0,0,1
 
 <Perfil>:
+    canvas.before:
+        Color:
+            rgba: .95, .95, .95, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
     #Widgets que serão trabalhados pelo arquivo .py
     setLogin: setLogin
     setNome: setNome
     setFoto: setFoto
 
-    ScrollView:
+    ScrollViewMenu:
         canvas.before:
             Color:
                 rgba: .95, .95, .95, 1

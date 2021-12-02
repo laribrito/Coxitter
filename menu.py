@@ -45,9 +45,9 @@ class Menu():
 
         # Botões
         btn1 = BtnMenu(
-            text = "HOME"
+            text = "FEED"
         )
-        btn1.bind(on_press=Menu.mostraHome)
+        btn1.bind(on_press=Menu.mostraFeed)
         Grid.add_widget(btn1)
 
         btn2 = BtnMenu(
@@ -89,10 +89,10 @@ class Menu():
 
         return box
 
-    def mostraHome(self, *args):
+    def mostraFeed(self, *args):
         manager = AppConfig.manager
         manager.transition = NoTransition()
-        manager.current="home"
+        manager.current="feed"
         manager.transition = SlideTransition()
 
     def mostraPerfil(self, *args):
