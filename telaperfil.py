@@ -7,17 +7,11 @@ from kivy.properties import ObjectProperty
 from menu import Menu
 from kivy.uix.label import Label
 from kivy.graphics import Color, Rectangle
+from titulo import Titulo
 Builder.load_file("telas/perfil.kv")
 
 #class appConfig
 from appConfig import AppConfig
-
-#Classe para título 
-class Titulo(Label):
-    #QUANDO TRABALHAR COM O TAMANHO TEM QUE USAR O DEF ON_SIZE()
-    def on_size(self, *args):
-        self.halign="right"
-        self.text_size=self.size
 
 class Perfil(Screen):
     #Elementos da tela .kv
@@ -28,10 +22,8 @@ class Perfil(Screen):
     #Barra superior
     def __init__(self, **kw):
         super().__init__(**kw)
-        layout = BoxLayout(size_hint_y=0.1, pos_hint={"top": 1})
-        titulo = Titulo(text="Perfil")
-        layout.add_widget(titulo)
-        self.add_widget(layout)
+        #Adiciona o título à tela
+        Titulo(self,"Perfil")
 
     def retornaPerfil(self, login):
         UrlRequest(f'http://127.0.0.1:5000/api/perfil/{login}',
