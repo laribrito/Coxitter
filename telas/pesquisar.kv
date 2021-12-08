@@ -8,11 +8,39 @@
 <Pesquisar>:
     canvas.before:
         Color:
-            rgba: .95, .95, .95, 1
+            rgba: .80, .91, 1, 1
         Rectangle:  
             pos: self.pos
             size: self.size
     ScrollViewMenu:
+        canvas.before:
+            Color:
+                rgba: .80, .91, 1, 1
+            Rectangle:  
+                pos: self.pos
+                size: self.size
         BoxLayout:
-            Label:
-                text: 'Eu sou o pesquisar'
+            GridLayout:
+                cols: 3
+                Label:
+                    size_hint_x: 0.05
+                TextInput:
+                    id: getUser
+                Label:
+                    size_hint_x: 0.05
+                        
+            BoxLayout:
+                Button:
+                    text: "Pesquisar"
+                    background_color: "#A3C0FF"
+                    color: .2, .2, .2,1
+                    background_normal: ""
+                    on_press:
+                        root.manager.current = 'resultados'
+                        root.manager.transition.direction = 'left'
+            BoxLayout:
+                Label:
+                    text: "Procure um Usuário ou Conta"
+                    font_size: '18sp'
+                    size_hint: 1, 0.5
+                    color: 0 , 0 , 0 , 1

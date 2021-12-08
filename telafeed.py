@@ -7,10 +7,15 @@ from titulo import Titulo
 # Carrega a interface
 Builder.load_file('telas/feed.kv')
 
-class Feed(Screen):
+class Fundo(Screen):
     def __init__(self, **kw):
         super().__init__(**kw)
         # Adiciona o menu a tela
         menu = Menu.criar(1)
         self.add_widget(menu)
-        Titulo(self, "Feed")
+        Titulo(self, "Meu Feed")
+
+class Feed(Screen):
+    def __init__(self, **kw):
+        super().__init__(**kw)
+        

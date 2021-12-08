@@ -36,10 +36,14 @@ class MyApp(App):
         sm.add_widget(MudarSenha(name='mudarSenha'))
         from telamudarNome import MudarNome
         sm.add_widget(MudarNome(name='mudarNome'))
-        from telafeed import Feed
-        sm.add_widget(Feed(name='feed'))
+        from telafeed import Fundo
+        sm.add_widget(Fundo(name='feed'))
+        #from telafeed import Feed
+        #sm.add_widget(Feed(name='feed'))
         from telapesquisar import Pesquisar
         sm.add_widget(Pesquisar(name='pesquisar'))
+        from telaresultados import Resultados
+        sm.add_widget(Resultados(name='resultados'))
 
         AppConfig.manager = sm 
 

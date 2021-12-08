@@ -4,8 +4,8 @@
     font_name: 'telas/fontes/NewsCycle.ttf'
     font_size: '20sp'
     color: 0,0,0,1
-    
-<Fundo>:
+
+<Resultados>:
     canvas.before:
         Color:
             rgba: .80, .91, 1, 1
@@ -14,8 +14,8 @@
             size: self.size
 
     ScrollViewMenu:
-        size_hint_x: .93
-        size_hint_y: .77
+        size_hint_x: .85
+        size_hint_y: .70
         pos_hint: {'center_x': .50, 'center_y': .50}
 
         canvas.before:
@@ -35,9 +35,7 @@
             size_hint_y: None
             orientation: 'vertical'
             Label:
-                text: 'Nome do usuario'
-                color: 0, 0, 0, 1
-                text_size: self.size
-                halign: 'left'
-            Label:
-                text: 'Quem foi o corno que criou Kivy ?'
+                text: "Sem resultados por enquanto"
+                font_size: '18sp'
+                size_hint: 1, None
+                color: 0 , 0 , 0 , 1
