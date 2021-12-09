@@ -13,11 +13,14 @@ class Fundo(Screen):
     caixinha = ObjectProperty(None)
     def __init__(self, **kw):
         super().__init__(**kw)
-        self.adicionar()
         # Adiciona o menu a tela
         menu = Menu.criar(1)
         self.add_widget(menu)
         Titulo(self, "Meu Feed")
+
+        for i in range(4):
+            self.adicionar()
+
     def adicionar(self):
         jaca = Postagem()
         self.caixinha.add_widget(jaca)
