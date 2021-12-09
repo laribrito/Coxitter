@@ -15,6 +15,8 @@ import json
 class AppConfig:
     config = {}
     manager = None
+    larguraBox = 0
+    
     '''
     Carrega a configuração do arquivo JSON.
 

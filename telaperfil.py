@@ -21,6 +21,8 @@ class Perfil(Screen):
     setFoto = ObjectProperty(None)
     caixinha = ObjectProperty(None)
 
+    menu = Menu(2)
+
     #Barra superior
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -56,8 +58,7 @@ class Perfil(Screen):
             self.setNome.text =  resposta['nome'] 
             self.setLogin.text = f'@{resposta["login"]}'
             # Adiciona o menu a tela
-            menu = Menu.criar(2)
-            self.add_widget(menu)
+            self.add_widget(self.menu)
         else:
             # Exibe a mensagem de erro na resposta
             self.setNome.text = ''

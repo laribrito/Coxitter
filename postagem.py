@@ -6,7 +6,7 @@ from kivy.graphics import Rectangle, Color
 from kivy.uix.image import AsyncImage
 from kivy.clock import Clock
 
-global larguraBox
+from appConfig import AppConfig
 
 #Classe para o corpo da mensagem
 class Mensagem(Label):
@@ -18,9 +18,8 @@ class Mensagem(Label):
         Clock.schedule_interval(self.atualizaLargura, 1/10)
 
     def atualizaLargura(self, *args):
-        global larguraBox
         self.size= self.texture_size
-        self.text_size = larguraBox, None
+        self.text_size = AppConfig.larguraBox, None
         
 #Sem ela a mensagem não vai ficar legal
 class Caixa(BoxLayout):
@@ -31,8 +30,7 @@ class Caixa(BoxLayout):
     
     def update_rect(instance, value, *args):
         #Armazena a largura do box lateral direito para passar ao labelMensagem
-        global larguraBox
-        larguraBox = instance.size[0]
+        AppConfig.larguraBox = instance.size[0]
 
 #pode tirar dps
 class Grid(GridLayout):

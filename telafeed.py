@@ -15,11 +15,12 @@ Builder.load_file('telas/feed.kv')
 
 class Fundo(Screen):
     caixinha = ObjectProperty(None)
+    menu = Menu(1)
     def __init__(self, **kw):
         super().__init__(**kw)
         # Adiciona o menu a tela
-        menu = Menu.criar(1)
-        self.add_widget(menu)
+       
+        self.add_widget(self.menu)
         Titulo(self, "Meu Feed")
         self.feed_seguidores(AppConfig.get_config('login'))
 

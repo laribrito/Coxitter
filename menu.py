@@ -31,13 +31,82 @@ class CaixaTexto(TextInput):
         self.height=self.line_height*6
         self.multiline=True
 
-class Menu():
-    def criar(num):
-        # Um boxlayout para abrigar todo o menu
-        box = BoxLayout(
-            padding = 0,
-            spacing=0
+class PopUpCoxinhar(Popup):
+    getText = CaixaTexto(
+        size_hint_y=0.3
+    )
+    setMensagem = Label(
+        size_hint_y= 0.3,
+        text="",
+        color=(0,0,0,1)
+    )
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        # Cria o popup de nova postagem a tela
+        label = Label(
+            size_hint_y= 0.1,
+            text="Coxinhe sobre o que está acontecendo...",
+            color=(0,0,0,1)
         )
+
+        box = BoxLayout(
+            size_hint_y=1,
+            orientation="vertical",
+            padding=30,
+            spacing=20
+        )
+
+        box.add_widget(label)
+        box.add_widget(self.setMensagem)
+        box.add_widget(self.getText)
+        
+
+        postar = Button(
+            text="Coxinhar",
+            size_hint_y=0.2,
+            background_normal="",
+            background_color="#CCEAFF",
+            color=(0,0,0,1)
+        )
+
+        postar.bind(on_press=self.postar)
+        box.add_widget(postar)
+        box.add_widget(Label(text="",size_hint_y=0.2))
+
+        self.separator_color=(0.8, 0.91, 1, 1)
+        self.title='Nova postagem'
+        self.title_color=(0,0,0,1)
+        self.title_size="18sp"
+        self.content=box
+        self.size_hint=(.9, .8)
+        self.pos_hint={"top":.9}
+        self.background=""
+        self.background_color=(.98, .98, .98, 1)
+
+    def postar(self, *args):
+        mensagem = self.getText.text
+        UrlRequest(f"http://127.0.0.1:5000/api/Postagem",
+            req_headers = {
+                'Authorization': f'Bearer {AppConfig.get_config("token")}',
+                'Content-type': 'application/x-www-form-urlencoded',
+                'Accept': 'text/plain'
+            },
+            req_body = urlencode({
+                'corpo': mensagem,
+            }),
+            on_success = self.postar_sucesso
+        )
+
+    def postar_sucesso(self, req, resposta):
+        self.setMensagem.text=resposta["msg"]
+        self.getText.text=""
+    
+class Menu(BoxLayout):
+    popCox = PopUpCoxinhar()
+    def __init__(self, num, **kwargs):
+        super().__init__(**kwargs)
+        self.padding=0
+        self.spacing=0
 
         # Gridlayout para os botões
         Grid = GridLayout(
@@ -49,19 +118,19 @@ class Menu():
         btn1 = BtnMenu(
             text = "FEED"
         )
-        btn1.bind(on_press=Menu.mostraFeed)
+        btn1.bind(on_press=self.mostraFeed)
         Grid.add_widget(btn1)
 
         btn2 = BtnMenu(
             text = "PERFIL"
         )
-        btn2.bind(on_press=Menu.mostraPerfil)
+        btn2.bind(on_press=self.mostraPerfil)
         Grid.add_widget(btn2)
         
         btn3 = BtnMenu(
             text = "PESQUISAR"
         )
-        btn3.bind(on_press=Menu.mostraPesquisar)
+        btn3.bind(on_press=self.mostraPesquisar)
         Grid.add_widget(btn3)
 
         # Botão "coxinhar"
@@ -72,11 +141,11 @@ class Menu():
             border=(0,0,0,0),
             size_hint=(None,None)
         )
-        coxinhar.bind(on_press=Menu.Coxinhar)
+        coxinhar.bind(on_press=self.Coxinhar)
         anchor.add_widget(coxinhar)
 
-        box.add_widget(anchor)
-        box.add_widget(Grid)
+        self.add_widget(anchor)
+        self.add_widget(Grid)
 
         #Tratamento estético nos botões
         # Todos os botões recebem a fonte normal
@@ -88,8 +157,6 @@ class Menu():
 
         # O botão correspondente ao número indicado recebe a fonte bold
         lista[num-1].font_name="telas/fontes/NewsCycle-Bold.ttf"
-
-        return box
 
     def mostraFeed(self, *args):
         manager = AppConfig.manager
@@ -110,48 +177,4 @@ class Menu():
         manager.transition = SlideTransition()
 
     def Coxinhar(self, *args):
-        # Cria o popup de nova postagem a tela
-        box = BoxLayout(size_hint_y=None)
-
-        getText = CaixaTexto(size_hint_y=None)
-        box.add_widget(getText)
-
-        postar = Button(
-            text="Coxinhar",
-            size_hint_y=None,
-            background_normal="",
-            background_color="#CCEAFF"
-        )
-        postar.bind(on_press=Menu.postar(getText.text))
-        box.add_widget(postar)
-
-        popup = Popup(
-            separator_color=(.8, .91, 1, 1),
-            title='Nova postagem',
-            title_color=(0,0,0,1),
-            title_size="18sp",
-            content=box,
-            size_hint=(.9, .8),
-            pos_hint={"top":.9},
-            background="",
-            background_color=(.98, .98, .98, 1)
-
-        )
-        popup.open()
-        
-    def postar(self, mensagem):
-        UrlRequest(f"http://127.0.0.1:5000/api/Postagem",
-            req_headers = {
-                'Authorization': f'Bearer {AppConfig.get_config("token")}',
-                'Content-type': 'application/x-www-form-urlencoded',
-                'Accept': 'text/plain'
-            },
-            req_body = urlencode({
-                'corpo': mensagem,
-            }
-            ),
-            on_success = Menu.postar_sucesso)
-
-    def postar_sucesso(self, req, resposta):
-        if resposta['status'] == 0:
-            print (resposta['msg'])
+        self.popCox.open()

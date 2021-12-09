@@ -9,9 +9,9 @@ from kivy.uix.boxlayout import BoxLayout
 Builder.load_file('telas/resultados.kv')
 
 class Resultados(Screen):
+    menu = Menu(3)
     def __init__(self, **kw):
         super().__init__(**kw)
         # Adiciona o menu a tela
-        menu = Menu.criar(3)
-        self.add_widget(menu)
+        self.add_widget(self.menu)
         Titulo(self, "Resultados")
