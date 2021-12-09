@@ -5,6 +5,10 @@ from kivy.uix.boxlayout import BoxLayout
 from titulo import Titulo
 from kivy.properties import ObjectProperty
 from postagem import Postagem
+from kivy.network.urlrequest import UrlRequest
+
+#class appConfig
+from appConfig import AppConfig
 
 # Carrega a interface
 Builder.load_file('telas/feed.kv')
@@ -17,10 +21,25 @@ class Fundo(Screen):
         menu = Menu.criar(1)
         self.add_widget(menu)
         Titulo(self, "Meu Feed")
+        self.feed_seguidores(AppConfig.get_config('login'))
 
-        for i in range(4):
-            self.adicionar()
+    def feed_seguidores(self, login):
+        UrlRequest(f'http://127.0.0.1:5000/api/feed/{login}',
+            req_headers = {
+                'Authorization': f'Bearer {AppConfig.get_config("token")}'
+            },
+            on_success = self.feed_sucesso)
 
-    def adicionar(self):
-        jaca = Postagem()
-        self.caixinha.add_widget(jaca)
+    def feed_sucesso(self, req, resposta):
+        if (resposta['status'] == 0):
+            # Exibe os dados do feed na interface
+            lista = resposta['lista']
+            for post in lista:
+                armazem = Postagem(
+                    nome = post['nome'],
+                    usuario = post['usuario'],
+                    mensagem = post['texto'],
+                    data_hora = post['datahora'],
+                    fota = post['foto']
+                )
+                self.caixinha.add_widget(armazem)

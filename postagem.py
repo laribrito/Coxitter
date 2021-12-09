@@ -70,7 +70,7 @@ class DataHora(Label):
         self.text_size=self.size
 
 class Postagem(BoxLayout):
-    def __init__(self, **kwargs):
+    def __init__(self, data_hora, nome, usuario, mensagem, fota, **kwargs):
         super().__init__(**kwargs)
         self.spacing=0
         self.padding=0
@@ -82,7 +82,7 @@ class Postagem(BoxLayout):
         #Imagem de perfil
         #LADO ESQUERDO
         imgPerfil=AsyncImage(
-            source="telas/imagens/padrao.png",
+            source=fota,
             size_hint_x = 0.3,
             size_hint_y=1, #centraliza a imagem na postagem
             
@@ -104,10 +104,10 @@ class Postagem(BoxLayout):
             cols=2
         )
         labelNome=Label(
-            text="FuracãoDaCPI"
+            text=nome
         )
         labelLogin=Label(
-            text="@robsu"
+            text='@'+ usuario
         )
         gridNome.add_widget(labelNome)
         gridNome.add_widget(labelLogin)
@@ -115,7 +115,7 @@ class Postagem(BoxLayout):
 
         #Texto da mensagem
         labelTexto=Mensagem(
-            text="Gente, fui hackeado! se eu aparecer no privado pedindo 5000 reais, sou eu mesmo! pfv paguem"
+            text=mensagem
 
         )
         box.add_widget(labelTexto)
@@ -141,7 +141,7 @@ class Postagem(BoxLayout):
 
         #Data e hora
         labelDataHora=DataHora(
-            text="08/12/2021 · 22:30"
+            text=data_hora
         )
         box.add_widget(labelDataHora)
 
