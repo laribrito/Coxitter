@@ -19,9 +19,10 @@ class Fundo(Screen):
     def __init__(self, **kw):
         super().__init__(**kw)
         # Adiciona o menu a tela
-       
         self.add_widget(self.menu)
+        #Adiciona o título
         Titulo(self, "Meu Feed")
+
         self.feed_seguidores(AppConfig.get_config('login'))
 
     def feed_seguidores(self, login):
@@ -32,6 +33,9 @@ class Fundo(Screen):
             on_success = self.feed_sucesso)
 
     def feed_sucesso(self, req, resposta):
+        #Limpa o widget
+        self.caixinha.clear_widgets()
+        #Depois adiciona
         if (resposta['status'] == 0):
             # Exibe os dados do feed na interface
             lista = resposta['lista']

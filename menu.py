@@ -11,6 +11,9 @@ from appConfig import AppConfig
 from kivy.network.urlrequest import UrlRequest
 from urllib.parse import urlencode
 
+global x 
+x=0
+
 # Classe para o GridLayout dos botões
 class BtnMenu(Button):
     def __init__(self, **kwargs):
@@ -105,6 +108,9 @@ class Menu(BoxLayout):
     popCox = PopUpCoxinhar()
     def __init__(self, num, **kwargs):
         super().__init__(**kwargs)
+
+        self.popCox.bind(on_dismiss=self.atualizaAi)
+
         self.padding=0
         self.spacing=0
 
@@ -157,18 +163,29 @@ class Menu(BoxLayout):
 
         # O botão correspondente ao número indicado recebe a fonte bold
         lista[num-1].font_name="telas/fontes/NewsCycle-Bold.ttf"
+    def atualizaAi(self, *args):
+        global x
+        x+=1
+        if x%4==0:
+            perfil = AppConfig.telas[0]
+            perfil.postagens(AppConfig.get_config('login'))
+
+            feed = AppConfig.telas[1]
+            feed.feed_seguidores(AppConfig.get_config('login'))
 
     def mostraFeed(self, *args):
         manager = AppConfig.manager
         manager.transition = NoTransition()
         manager.current="feed"
         manager.transition = SlideTransition()
+        # manager.current_screen.feed_seguidores(AppConfig.get_config('login'))
 
     def mostraPerfil(self, *args):
         manager = AppConfig.manager
         manager.transition = NoTransition()
         manager.current="perfil"
         manager.transition = SlideTransition()
+        # manager.current_screen.retornaPerfil(AppConfig.get_config("login"))
 
     def mostraPesquisar(self, *args):
         manager = AppConfig.manager

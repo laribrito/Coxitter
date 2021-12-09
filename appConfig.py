@@ -16,6 +16,7 @@ class AppConfig:
     config = {}
     manager = None
     larguraBox = 0
+    telas=[]
     
     '''
     Carrega a configuração do arquivo JSON.

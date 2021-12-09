@@ -13,7 +13,9 @@ class MyApp(App):
         
         if (AppConfig.get_config('token') != None):
             from telaperfil import Perfil
-            sm.add_widget(Perfil(name='perfil'))
+            perfil = Perfil(name='perfil')
+            AppConfig.telas.append(perfil)
+            sm.add_widget(perfil)
             sm.current_screen.retornaPerfil(AppConfig.get_config('login'))
             from telalogin import Login
             sm.add_widget(Login(name='login'))
@@ -21,7 +23,9 @@ class MyApp(App):
             from telalogin import Login
             sm.add_widget(Login(name='login'))
             from telaperfil import Perfil
-            sm.add_widget(Perfil(name='perfil'))
+            perfil = Perfil(name='perfil')
+            AppConfig.telas.append(perfil)
+            sm.add_widget(perfil)
 
         # Carrega as outras telas
         from telacadastro import Cadastro
@@ -37,7 +41,9 @@ class MyApp(App):
         from telamudarNome import MudarNome
         sm.add_widget(MudarNome(name='mudarNome'))
         from telafeed import Fundo
-        sm.add_widget(Fundo(name='feed'))
+        fundo = Fundo(name='feed')
+        AppConfig.telas.append(fundo)
+        sm.add_widget(fundo)
         #from telafeed import Feed
         #sm.add_widget(Feed(name='feed'))
         from telapesquisar import Pesquisar

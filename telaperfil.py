@@ -26,6 +26,8 @@ class Perfil(Screen):
     #Barra superior
     def __init__(self, **kw):
         super().__init__(**kw)
+        # Adiciona o menu a tela
+        self.add_widget(self.menu)
         #Adiciona o título à tela
         Titulo(self,"Perfil")
 
@@ -57,8 +59,6 @@ class Perfil(Screen):
             # Exibe os dados do perfil na interface
             self.setNome.text =  resposta['nome'] 
             self.setLogin.text = f'@{resposta["login"]}'
-            # Adiciona o menu a tela
-            self.add_widget(self.menu)
         else:
             # Exibe a mensagem de erro na resposta
             self.setNome.text = ''
@@ -100,6 +100,7 @@ class Perfil(Screen):
             on_success = self.postagens_sucesso)
 
     def postagens_sucesso(self, req, resposta):
+        self.caixinha.clear_widgets()
         if (resposta['status'] == 0):
             # Exibe os dados do feed na interface
             lista = resposta['lista']
