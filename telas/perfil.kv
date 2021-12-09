@@ -16,6 +16,7 @@
     setLogin: setLogin
     setNome: setNome
     setFoto: setFoto
+    caixinha: caixinha
 
     ScrollViewMenu:
         canvas.before:
@@ -93,3 +94,9 @@
                             background_normal: ""
                             on_press:
                                 root.sair()
+
+                Label:
+                    text:'Suas Postagens'
+                    font_name: 'telas/fontes/NewsCycle-Bold.ttf'
+                BoxLayout:
+                    id: caixinha

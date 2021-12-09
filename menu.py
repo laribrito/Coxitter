@@ -8,6 +8,8 @@ from kivy.uix.popup import Popup
 from kivy.uix.textinput import TextInput
 from kivy.graphics import Rectangle, Color
 from appConfig import AppConfig
+from kivy.network.urlrequest import UrlRequest
+from urllib.parse import urlencode
 
 # Classe para o GridLayout dos botões
 class BtnMenu(Button):
@@ -120,6 +122,7 @@ class Menu():
             background_normal="",
             background_color="#CCEAFF"
         )
+        postar.bind(on_press=Menu.postar(getText.text))
         box.add_widget(postar)
 
         popup = Popup(
@@ -136,3 +139,19 @@ class Menu():
         )
         popup.open()
         
+    def postar(self, mensagem):
+        UrlRequest(f"http://127.0.0.1:5000/api/Postagem",
+            req_headers = {
+                'Authorization': f'Bearer {AppConfig.get_config("token")}',
+                'Content-type': 'application/x-www-form-urlencoded',
+                'Accept': 'text/plain'
+            },
+            req_body = urlencode({
+                'corpo': mensagem,
+            }
+            ),
+            on_success = Menu.postar_sucesso)
+
+    def postar_sucesso(self, req, resposta):
+        if resposta['status'] == 0:
+            print (resposta['msg'])

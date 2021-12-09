@@ -12,12 +12,14 @@ Builder.load_file("telas/perfil.kv")
 
 #class appConfig
 from appConfig import AppConfig
+from postagem import Postagem
 
 class Perfil(Screen):
     #Elementos da tela .kv
     setNome = ObjectProperty(None)
     setLogin = ObjectProperty(None)
     setFoto = ObjectProperty(None)
+    caixinha = ObjectProperty(None)
 
     #Barra superior
     def __init__(self, **kw):
@@ -41,6 +43,7 @@ class Perfil(Screen):
             on_success = self.foto_sucesso,
             on_error = self.erro,
         )
+        self.postagens(AppConfig.get_config('login'))
     
     '''
     Recebe a resposta da requisição do perfil.
@@ -87,4 +90,25 @@ class Perfil(Screen):
         if (resposta['status'] == 0):
             self.manager.transition.direction = 'right'
             self.manager.current = 'login'
+
+    def postagens(self, login):
+        UrlRequest(f'http://127.0.0.1:5000/api/buscar_msg/{login}',
+            req_headers = {
+                'Authorization': f'Bearer {AppConfig.get_config("token")}'
+            },
+            on_success = self.postagens_sucesso)
+
+    def postagens_sucesso(self, req, resposta):
+        if (resposta['status'] == 0):
+            # Exibe os dados do feed na interface
+            lista = resposta['lista']
+            for post in lista:
+                armazem = Postagem(
+                    nome = post['nome'],
+                    usuario = post['usuario'],
+                    mensagem = post['texto'],
+                    data_hora = post['datahora'],
+                    fota = post['foto']
+                )
+                self.caixinha.add_widget(armazem)
 
