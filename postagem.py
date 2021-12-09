@@ -5,9 +5,18 @@ from kivy.uix.label import Label
 from kivy.graphics import Rectangle, Color
 from kivy.uix.image import AsyncImage
 
-class Postagem():
-    def __init__(self) -> None:
-        tudo=BoxLayout()
+class Mensagem(Label):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.size_hint_x = 1
+
+    def on_size(self, *args):
+        self.text_size = self.width, None
+        self.size = self.texture_size
+
+class Postagem(BoxLayout):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
 
         layout=GridLayout(
             cols=2
@@ -15,20 +24,23 @@ class Postagem():
 
         #Imagem de perfil
         imgPerfil=AsyncImage(
-            source=""
+            source="telas/imagens/padrao.png",
+            size_hint_x = 0.3,
+            
         )
         layout.add_widget(imgPerfil)
 
         box=BoxLayout(
-            orientation="vertical"
         )
+        print(box.width)
 
         #Nome e login
         gridNome=GridLayout(
+            spacing = 20,
             cols=2
         )
         labelNome=Label(
-            text="Robsu"
+            text="FuracãoDaCPI"
         )
         labelLogin=Label(
             text="@robsu"
@@ -38,8 +50,9 @@ class Postagem():
         box.add_widget(gridNome)
 
         #Texto da mensagem
-        labelTexto=Label(
-            text="Mensagem"
+        labelTexto=Mensagem(
+            text="Gente, fui hackeado! se eu aparecer no privado pedindo 5000 reais, sou eu mesmo! pfv paguem"
+
         )
         box.add_widget(labelTexto)
 
@@ -47,15 +60,15 @@ class Postagem():
         gridIcones=GridLayout(
             cols=2
         )
-        btnCurtir=Button()
-        btnComentar=Button()
+        btnCurtir=Button(background_normal='telas/imagens/curtir.png')
+        btnComentar=Button(background_normal='telas/imagens/comentario.png')
         gridIcones.add_widget(btnCurtir)
         gridIcones.add_widget(btnComentar)
         box.add_widget(gridIcones)
 
         #Data e hora
         labelDataHora=Label(
-            text="Hoje e agora"
+            text="08/12/2021 · 22:30"
         )
         box.add_widget(labelDataHora)
 
@@ -63,8 +76,20 @@ class Postagem():
         layout.add_widget(box)
 
         #Armazena em um boxlayout
-        tudo.add_widget(layout)
+        self.add_widget(layout)
 
         #Para poder adicionar essa linha no fim
-        imgLinha=AsyncImage()
-        tudo.add_widget(imgLinha)
+        imgLinha=AsyncImage(source='telas/imagens/barrinha.png')
+        self.add_widget(imgLinha)
+
+        self.bind(pos=self.update_rect, size=self.update_rect)
+        
+        with self.canvas.before:
+            Color(.80, .91, 1, 1)
+            #ARMAZENANDO A FORMA EM UMA VARIÁVEL
+            self.rect=Rectangle(pos=self.pos, size=self.size)
+    
+    def update_rect(instance, value, *args):
+        #E ATUALIZANDO ELA ATRAVÉS DE UMA FUNÇÃO
+        instance.rect.pos = instance.pos
+        instance.rect.size = instance.size
