@@ -178,7 +178,7 @@ class Menu(BoxLayout):
         manager.transition = NoTransition()
         manager.current="feed"
         manager.transition = SlideTransition()
-        # manager.current_screen.feed_seguidores(AppConfig.get_config('login'))
+        manager.current_screen.atualizar()
 
     def mostraPerfil(self, *args):
         manager = AppConfig.manager
