@@ -34,6 +34,7 @@ class Pesquisar(Screen):
             self.manager.current = 'buscaPerfil'
             self.manager.transition.direction = 'left'
             self.manager.current_screen.mostraPerfil(resposta)
+            self.setMensagem.text=""
         else:
-            self.setMensagem=resposta["msg"]
+            self.setMensagem.text=resposta["msg"]
     
