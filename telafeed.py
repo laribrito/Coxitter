@@ -44,15 +44,14 @@ class Fundo(Screen):
         )
 
     def atualizar_sucesso(self, req, resposta):
-        tamanho = len(resposta["lista"])
-        print(tamanho)
-        if self.numSeguidores != tamanho:
-            print("tem que atualizar")
-            self.feed_seguidores(AppConfig.get_config("login"))
-            self.numSeguidores = tamanho
+        if resposta["status"] == 0:
+            tamanho = len(resposta["lista"])
             print(tamanho)
-        else:
-            print("não precisa")
+            if self.numSeguidores != tamanho:
+                self.feed_seguidores(AppConfig.get_config("login"))
+                self.numSeguidores = tamanho
+                print(tamanho)
+
 
     def feed_sucesso(self, req, resposta):
         #Limpa o widget
