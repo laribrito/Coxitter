@@ -19,6 +19,8 @@ class Perfil(Screen):
     setNome = ObjectProperty(None)
     setLogin = ObjectProperty(None)
     setFoto = ObjectProperty(None)
+    setSeguidores = ObjectProperty(None)
+    setSeguindo = ObjectProperty(None)
     caixinha = ObjectProperty(None)
 
     menu = Menu(2)
@@ -32,14 +34,16 @@ class Perfil(Screen):
         Titulo(self,"Perfil")
 
     def retornaPerfil(self, login):
+        #busca informações básicas do usuario
         UrlRequest(f'http://127.0.0.1:5000/api/perfil/{login}',
                 req_headers = {
                     'Authorization': f'Bearer {AppConfig.get_config("token")}'
                 },
                 on_success = self.perfil_sucesso,
                 on_error = self.erro,
-            )
+        )
 
+        #busca a foto do perfil
         UrlRequest(f"http://127.0.0.1:5000/api/foto/{login}",
             req_headers = {
                 'Authorization': f'Bearer {AppConfig.get_config("token")}'
@@ -47,7 +51,16 @@ class Perfil(Screen):
             on_success = self.foto_sucesso,
             on_error = self.erro,
         )
-        self.postagens(AppConfig.get_config('login'))
+
+        #pega as mensagens
+        UrlRequest(f'http://127.0.0.1:5000/api/buscar_msg/{login}',
+            req_headers = {
+                'Authorization': f'Bearer {AppConfig.get_config("token")}'
+            },
+            on_success = self.postagens_sucesso
+        )
+
+        self.atualizaNumeros(login)
     
     '''
     Recebe a resposta da requisição do perfil.
@@ -63,6 +76,23 @@ class Perfil(Screen):
             # Exibe a mensagem de erro na resposta
             self.setNome.text = ''
             self.setLogin.text = resposta['msg']
+
+    def atualizaNumeros(self, login):
+        #busca os seguidores
+        UrlRequest(f'http://127.0.0.1:5000/api/feed_SEGUIDORES/{login}',
+            req_headers = {
+                'Authorization': f'Bearer {AppConfig.get_config("token")}'
+            },
+            on_success = self.seguidores_sucesso
+        )
+
+        #busca quem o usuario segue
+        UrlRequest(f'http://127.0.0.1:5000/api/feed_SEGUINDO/{login}',
+            req_headers = {
+                'Authorization': f'Bearer {AppConfig.get_config("token")}'
+            },
+            on_success = self.seguindo_sucesso
+        )
 
     '''
     Efetua o tratamento em caso de erro ao efetuar a requisição.
@@ -90,14 +120,7 @@ class Perfil(Screen):
     def saida_sucesso(self, req, resposta):
         if (resposta['status'] == 0):
             self.manager.transition.direction = 'right'
-            self.manager.current = 'login'
-
-    def postagens(self, login):
-        UrlRequest(f'http://127.0.0.1:5000/api/buscar_msg/{login}',
-            req_headers = {
-                'Authorization': f'Bearer {AppConfig.get_config("token")}'
-            },
-            on_success = self.postagens_sucesso)
+            self.manager.current = 'login'        
 
     def postagens_sucesso(self, req, resposta):
         self.caixinha.clear_widgets()
@@ -113,4 +136,17 @@ class Perfil(Screen):
                     fota = post['foto']
                 )
                 self.caixinha.add_widget(armazem)
+    
+    def seguidores_sucesso(self, req, resposta):
+        num = resposta["lista"]
+        num = len(num)
+        if num == 1:
+            self.setSeguidores.text=f"1 seguidor"
+        else:
+            self.setSeguidores.text=f"{num} seguidores"
+    
+    def seguindo_sucesso(self, req, resposta):
+        num = resposta["lista"]
+        self.setSeguindo.text=f"{len(num)} seguindo"
+
 

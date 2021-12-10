@@ -17,6 +17,8 @@
     setNome: setNome
     setFoto: setFoto
     caixinha: caixinha
+    setSeguidores: setSeguidores
+    setSeguindo: setSeguindo
 
     ScrollViewMenu:
         canvas.before:
@@ -65,8 +67,10 @@
                         size_hint_x: .92
                         orientation: 'vertical'
                         Label:
+                            id: setSeguidores
                             text:'x seguidores'
                         Label:
+                            id: setSeguindo
                             text:'y seguindo'
                     BoxLayout:
                         size_hint_x: .3

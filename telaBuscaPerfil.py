@@ -17,12 +17,21 @@ Builder.load_file('telas/buscaPerfil.kv')
 class BuscaPerfil(Screen):
     menu = Menu(3)
 
+    btnSeguir = Button(
+            font_name='telas/fontes/NewsCycle.ttf',
+            background_color="#A3C0FF",
+            color=(.2, .2, .2,1),
+            background_normal="",
+    )
+
     #Elementos da tela .kv
     setNome = ObjectProperty(None)
     setLogin = ObjectProperty(None)
     setFoto = ObjectProperty(None)
     caixinha = ObjectProperty(None)
     setBtnSeguir = ObjectProperty(None)
+    setSeguidores = ObjectProperty(None)
+    setSeguindo = ObjectProperty(None)
 
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -61,23 +70,85 @@ class BuscaPerfil(Screen):
         on_error=self.erro
         )
 
-    def testeSeguindo(self, req, resposta):
-        btnSeguir = Button(
-            font_name='telas/fontes/NewsCycle.ttf',
-            background_color="#A3C0FF",
-            color=(.2, .2, .2,1),
-            background_normal="",
+        #busca os seguidores
+        UrlRequest(f'http://127.0.0.1:5000/api/feed_SEGUIDORES/{login}',
+            req_headers = {
+                'Authorization': f'Bearer {AppConfig.get_config("token")}'
+            },
+            on_success = self.seguidores_sucesso
         )
+
+        #busca quem o usuario segue
+        UrlRequest(f'http://127.0.0.1:5000/api/feed_SEGUINDO/{login}',
+            req_headers = {
+                'Authorization': f'Bearer {AppConfig.get_config("token")}'
+            },
+            on_success = self.seguindo_sucesso
+        )
+
+    def testeSeguindo(self, req, resposta):
+        self.btnSeguir.bind(on_press=self.funcaoBtnSeguir)
         if resposta["status"] == 0:
             self.setBtnSeguir.clear_widgets()
             #mostra o botão de deixar de seguir
-            btnSeguir.text="Deixar de seguir"
-            self.setBtnSeguir.add_widget(btnSeguir)
+            self.btnSeguir.text="Deixar de seguir"
+            self.setBtnSeguir.add_widget(self.btnSeguir)
         else:
             self.setBtnSeguir.clear_widgets()
             #mostra o botão de seguir
-            btnSeguir.text="Seguir"
-            self.setBtnSeguir.add_widget(btnSeguir)
+            self.btnSeguir.text="Seguir"
+            self.setBtnSeguir.add_widget(self.btnSeguir)
+
+    def seguidores_sucesso(self, req, resposta):
+        num = resposta["lista"]
+        num = len(num)
+        if num == 1:
+            self.setSeguidores.text=f"1 seguidor"
+        else:
+            self.setSeguidores.text=f"{num} seguidores"
+    
+    def seguindo_sucesso(self, req, resposta):
+        num = resposta["lista"]
+        self.setSeguindo.text=f"{len(num)} seguindo"
+
+    def funcaoBtnSeguir(instance, *args):
+        texto = instance.btnSeguir.text
+        login = instance.setLogin.text
+        login = login[1:len(login)]
+        if texto == "Seguir":
+            instance.btnSeguir.text = "Deixar de seguir"
+            num = instance.setSeguidores.text
+            num = num.split(sep=" ")
+            num = int(num[0])
+            num +=1
+            if num == 1:
+                instance.setSeguidores.text = f"1 seguidor"
+            else:
+                instance.setSeguidores.text = f"{num} seguidores"
+            
+            UrlRequest(f'http://127.0.0.1:5000/api/seguir/{login}',
+                req_headers = {
+                    'Authorization': f'Bearer {AppConfig.get_config("token")}'
+                },
+                method="POST"
+            )
+        else:
+            instance.btnSeguir.text = "Seguir"
+            num = instance.setSeguidores.text
+            num = num.split(sep=" ")
+            num = int(num[0])
+            num -=1
+            if num == 1:
+                instance.setSeguidores.text = f"1 seguidor"
+            else:
+                instance.setSeguidores.text = f"{num} seguidores"
+
+            UrlRequest(f'http://127.0.0.1:5000/api/unfollow/{login}',
+                req_headers = {
+                    'Authorization': f'Bearer {AppConfig.get_config("token")}'
+                },
+                method="DELETE"
+            )
 
     def erro(self, req, erro):
         self.setNome.text = ''

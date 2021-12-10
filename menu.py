@@ -185,7 +185,7 @@ class Menu(BoxLayout):
         manager.transition = NoTransition()
         manager.current="perfil"
         manager.transition = SlideTransition()
-        # manager.current_screen.retornaPerfil(AppConfig.get_config("login"))
+        manager.current_screen.atualizaNumeros(AppConfig.get_config("login"))
 
     def mostraPesquisar(self, *args):
         manager = AppConfig.manager
