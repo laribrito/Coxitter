@@ -175,7 +175,7 @@ class Postagem(BoxLayout):
         self.add_widget(imgLinha)
 
         #busca quem o usuario segue
-        UrlRequest(f'http://127.0.0.1:5000//api/verifica_curtida/{id_post}',
+        UrlRequest(f'{AppConfig.servidor}//api/verifica_curtida/{id_post}',
             req_headers = {
                 'Authorization': f'Bearer {AppConfig.get_config("token")}'
             },
@@ -209,7 +209,7 @@ class Postagem(BoxLayout):
             quantL.text = f"{quant} curt."
             
             id_post = instance.id_post
-            UrlRequest(f'http://127.0.0.1:5000/api/curtir/{id_post}',
+            UrlRequest(f'{AppConfig.servidor}/api/curtir/{id_post}',
                 req_headers = {
                     'Authorization': f'Bearer {AppConfig.get_config("token")}'
                 },
@@ -228,7 +228,7 @@ class Postagem(BoxLayout):
             quantL.text = f"{quant} curt."
 
             id_post = instance.id_post
-            UrlRequest(f'http://127.0.0.1:5000/api/descurtir/{id_post}',
+            UrlRequest(f'{AppConfig.servidor}/api/descurtir/{id_post}',
                 req_headers = {
                     'Authorization': f'Bearer {AppConfig.get_config("token")}'
                 },

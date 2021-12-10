@@ -16,7 +16,7 @@ class MudarSenha(Screen):
    
    def mudarsenha(self, senha1, senha2):
       UrlRequest(
-         "http://127.0.0.1:5000/api/editarsenha",
+         f"{AppConfig.servidor}/api/editarsenha",
          on_success=self.mudarsenha_sucesso,
          on_error=self.mudarsenha_erro,
          req_headers = {

@@ -17,6 +17,7 @@ class AppConfig:
     manager = None
     larguraBox = 0
     telas=[]
+    servidor = "http://127.0.0.1:5000"
     
     '''
     Carrega a configuração do arquivo JSON.

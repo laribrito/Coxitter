@@ -17,7 +17,7 @@ class Login(Screen):
    
    def entrar(self, login, senha):
       UrlRequest(
-         "http://127.0.0.1:5000/api/login",
+         f"{AppConfig.servidor}/api/login",
          on_success=self.login_sucesso,
          on_error=self.login_erro,
          req_headers = {

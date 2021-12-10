@@ -88,7 +88,7 @@ class PopUpCoxinhar(Popup):
 
     def postar(self, *args):
         mensagem = self.getText.text
-        UrlRequest(f"http://127.0.0.1:5000/api/Postagem",
+        UrlRequest(f"{AppConfig.servidor}/api/Postagem",
             req_headers = {
                 'Authorization': f'Bearer {AppConfig.get_config("token")}',
                 'Content-type': 'application/x-www-form-urlencoded',

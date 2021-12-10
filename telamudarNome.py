@@ -15,7 +15,7 @@ class MudarNome(Screen):
    
    def mudarnome(self, nome):
       UrlRequest(
-         "http://127.0.0.1:5000/api/editarnome",
+         f"{AppConfig.servidor}/api/editarnome",
          on_success=self.editarNomeSucesso,
          on_error=self.erro,
          req_headers = {

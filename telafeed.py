@@ -28,7 +28,7 @@ class Fundo(Screen):
         self.atualizar()
 
     def feed_seguidores(self, login):
-        UrlRequest(f'http://127.0.0.1:5000/api/feed/{login}',
+        UrlRequest(f'{AppConfig.servidor}/api/feed/{login}',
             req_headers = {
                 'Authorization': f'Bearer {AppConfig.get_config("token")}'
             },
@@ -36,7 +36,7 @@ class Fundo(Screen):
         )
 
     def atualizar(self):
-        UrlRequest(f'http://127.0.0.1:5000/api/feed_SEGUINDO/{AppConfig.get_config("login")}',
+        UrlRequest(f'{AppConfig.servidor}/api/feed_SEGUINDO/{AppConfig.get_config("login")}',
             req_headers = {
                 'Authorization': f'Bearer {AppConfig.get_config("token")}'
             },

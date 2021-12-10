@@ -14,7 +14,7 @@ class MudarBio(Screen):
    
    def mudarbio(self, bio):
       UrlRequest(
-         "http://127.0.0.1:5000/api/mudarBio",
+         f"{AppConfig.servidor}/api/mudarBio",
          on_success=self.mudarbio_sucesso,
          on_error=self.mudarbio_erro,
          req_headers = {

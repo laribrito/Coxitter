@@ -37,7 +37,7 @@ class BuscaPerfil(Screen):
         super().__init__(**kw)
         # Adiciona o menu a tela
         self.add_widget(self.menu)
-        Titulo(self, "Resultado")
+        Titulo(self, "Perfil")
 
     def mostraPerfil(self, resposta, *args):
         login = resposta["login"]
@@ -45,7 +45,7 @@ class BuscaPerfil(Screen):
         self.setLogin.text = f'@{login}'
 
         #busca a foto do usuário
-        UrlRequest(f"http://127.0.0.1:5000/api/foto/{login}",
+        UrlRequest(f"{AppConfig.servidor}/api/foto/{login}",
             req_headers = {
                 'Authorization': f'Bearer {AppConfig.get_config("token")}'
             },
@@ -54,7 +54,7 @@ class BuscaPerfil(Screen):
         )    
 
         #busca as mensagens
-        UrlRequest(f'http://127.0.0.1:5000/api/buscar_msg/{login}',
+        UrlRequest(f'{AppConfig.servidor}/api/buscar_msg/{login}',
             req_headers = {
                 'Authorization': f'Bearer {AppConfig.get_config("token")}'
             },
@@ -62,7 +62,7 @@ class BuscaPerfil(Screen):
         )
 
         #verifica se está seguindo
-        UrlRequest(f"http://127.0.0.1:5000/api/confere_follow/{login}",
+        UrlRequest(f"{AppConfig.servidor}/api/confere_follow/{login}",
         req_headers = {
                 'Authorization': f'Bearer {AppConfig.get_config("token")}'
         },
@@ -71,7 +71,7 @@ class BuscaPerfil(Screen):
         )
 
         #busca os seguidores
-        UrlRequest(f'http://127.0.0.1:5000/api/feed_SEGUIDORES/{login}',
+        UrlRequest(f'{AppConfig.servidor}/api/feed_SEGUIDORES/{login}',
             req_headers = {
                 'Authorization': f'Bearer {AppConfig.get_config("token")}'
             },
@@ -79,7 +79,7 @@ class BuscaPerfil(Screen):
         )
 
         #busca quem o usuario segue
-        UrlRequest(f'http://127.0.0.1:5000/api/feed_SEGUINDO/{login}',
+        UrlRequest(f'{AppConfig.servidor}/api/feed_SEGUINDO/{login}',
             req_headers = {
                 'Authorization': f'Bearer {AppConfig.get_config("token")}'
             },
@@ -126,7 +126,7 @@ class BuscaPerfil(Screen):
             else:
                 instance.setSeguidores.text = f"{num} seguidores"
             
-            UrlRequest(f'http://127.0.0.1:5000/api/seguir/{login}',
+            UrlRequest(f'{AppConfig.servidor}/api/seguir/{login}',
                 req_headers = {
                     'Authorization': f'Bearer {AppConfig.get_config("token")}'
                 },
@@ -143,7 +143,7 @@ class BuscaPerfil(Screen):
             else:
                 instance.setSeguidores.text = f"{num} seguidores"
 
-            UrlRequest(f'http://127.0.0.1:5000/api/unfollow/{login}',
+            UrlRequest(f'{AppConfig.servidor}/api/unfollow/{login}',
                 req_headers = {
                     'Authorization': f'Bearer {AppConfig.get_config("token")}'
                 },

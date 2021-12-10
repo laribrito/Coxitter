@@ -79,10 +79,11 @@
                             cols: 3
                             Label:
                                 size_hint_x: .5
-                            Button:
-                                size_hint_x: '48px'
+                            Botao:
                                 background_normal: 'telas/imagens/engrenagem.png'
-                                height: 52
+                                size: 52,52
+                                border: 0,0,0,0
+                                size_hint: None,None
                                 background_down: 'telas/imagens/engrenagem_albina.png'
                                 on_press:
                                     root.manager.current = 'config'

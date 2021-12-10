@@ -7,12 +7,14 @@ from kivy.properties import ObjectProperty
 # Carrega a interface
 Builder.load_file('telas/cadastro.kv')
 
+from appConfig import AppConfig
+
 class Cadastro(Screen):
    #Elementos da interface
    setMensagem = ObjectProperty(None)
 
    def cadastrar(self, login, nome, senha1, senha2):
-      UrlRequest(f'http://127.0.0.1:5000/api/cadastro',
+      UrlRequest(f'{AppConfig.servidor}/api/cadastro',
             on_success = self.cadastro_sucesso,
             on_error = self.cadastro_erro,
             req_headers = {

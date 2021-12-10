@@ -35,7 +35,7 @@ class Perfil(Screen):
 
     def retornaPerfil(self, login):
         #busca informações básicas do usuario
-        UrlRequest(f'http://127.0.0.1:5000/api/perfil/{login}',
+        UrlRequest(f'{AppConfig.servidor}/api/perfil/{login}',
                 req_headers = {
                     'Authorization': f'Bearer {AppConfig.get_config("token")}'
                 },
@@ -44,7 +44,7 @@ class Perfil(Screen):
         )
 
         #busca a foto do perfil
-        UrlRequest(f"http://127.0.0.1:5000/api/foto/{login}",
+        UrlRequest(f"{AppConfig.servidor}/api/foto/{login}",
             req_headers = {
                 'Authorization': f'Bearer {AppConfig.get_config("token")}'
             },
@@ -53,7 +53,7 @@ class Perfil(Screen):
         )
 
         #pega as mensagens
-        UrlRequest(f'http://127.0.0.1:5000/api/buscar_msg/{login}',
+        UrlRequest(f'{AppConfig.servidor}/api/buscar_msg/{login}',
             req_headers = {
                 'Authorization': f'Bearer {AppConfig.get_config("token")}'
             },
@@ -79,7 +79,7 @@ class Perfil(Screen):
 
     def atualizaNumeros(self, login):
         #busca os seguidores
-        UrlRequest(f'http://127.0.0.1:5000/api/feed_SEGUIDORES/{login}',
+        UrlRequest(f'{AppConfig.servidor}/api/feed_SEGUIDORES/{login}',
             req_headers = {
                 'Authorization': f'Bearer {AppConfig.get_config("token")}'
             },
@@ -87,7 +87,7 @@ class Perfil(Screen):
         )
 
         #busca quem o usuario segue
-        UrlRequest(f'http://127.0.0.1:5000/api/feed_SEGUINDO/{login}',
+        UrlRequest(f'{AppConfig.servidor}/api/feed_SEGUINDO/{login}',
             req_headers = {
                 'Authorization': f'Bearer {AppConfig.get_config("token")}'
             },
@@ -108,7 +108,7 @@ class Perfil(Screen):
             self.setFoto.reload()
     
     def sair(self):
-        UrlRequest(f'http://127.0.0.1:5000/api/sair',
+        UrlRequest(f'{AppConfig.servidor}/api/sair',
             req_headers = {
                 'Authorization': f'Bearer {AppConfig.get_config("token")}'
             },

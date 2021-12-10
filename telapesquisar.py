@@ -22,7 +22,7 @@ class Pesquisar(Screen):
         Titulo(self, "Pesquisar")
 
     def buscaPerfil(self, login):
-        UrlRequest(f'http://127.0.0.1:5000/api/perfil/{login}',
+        UrlRequest(f'{AppConfig.servidor}/api/perfil/{login}',
                 req_headers = {
                     'Authorization': f'Bearer {AppConfig.get_config("token")}'
                 },

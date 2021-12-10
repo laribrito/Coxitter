@@ -47,7 +47,7 @@ class MudarFoto(Screen):
         try:
             arq = open(os.path.join(pasta, arquivo[0]), 'rb')
 
-            UrlRequest(f'http://127.0.0.1:5000/api/foto/{AppConfig.get_config("login")}',
+            UrlRequest(f'{AppConfig.servidor}/api/foto/{AppConfig.get_config("login")}',
                 req_headers = {
                     'Authorization': f'Bearer {AppConfig.get_config("token")}',
                 },
