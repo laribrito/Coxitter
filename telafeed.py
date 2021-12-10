@@ -67,7 +67,9 @@ class Fundo(Screen):
                     usuario = post['usuario'],
                     mensagem = post['texto'],
                     data_hora = post['datahora'],
-                    fota = post['foto']
+                    fota = post['foto'],
+                    id_post = post["id_post"],
+                    quantCurtidas = post["quantCurtidas"]
                 )
                 self.caixinha.add_widget(armazem)
             self.rolagem.scroll_y=1

@@ -129,11 +129,13 @@ class Perfil(Screen):
             lista = resposta['lista']
             for post in lista:
                 armazem = Postagem(
+                    id_post=post["id_post"],
                     nome = post['nome'],
                     usuario = post['usuario'],
                     mensagem = post['texto'],
                     data_hora = post['datahora'],
-                    fota = post['foto']
+                    fota = post['foto'],
+                    quantCurtidas = post["quantCurtidas"]
                 )
                 self.caixinha.add_widget(armazem)
     

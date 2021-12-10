@@ -4,7 +4,12 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.graphics import Rectangle, Color
 from kivy.uix.image import AsyncImage
+from kivy.network.urlrequest import UrlRequest
 from kivy.clock import Clock
+from kivy.properties import ObjectProperty
+
+global x 
+x=0
 
 from appConfig import AppConfig
 
@@ -26,11 +31,14 @@ class Caixa(BoxLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.bind(size=self.update_rect)
+        self.bind(width=self.update_rect)
     
     def update_rect(instance, value, *args):
-        #Armazena a largura do box lateral direito para passar ao labelMensagem
-        AppConfig.larguraBox = instance.size[0]
+        global x
+        if x < 4:
+            #Armazena a largura do box lateral direito para passar ao labelMensagem
+            AppConfig.larguraBox = instance.size[0]
+        x+=1
 
 #pode tirar dps
 class Grid(GridLayout):
@@ -68,10 +76,17 @@ class DataHora(Label):
         self.text_size=self.size
 
 class Postagem(BoxLayout):
-    def __init__(self, data_hora, nome, usuario, mensagem, fota, **kwargs):
+    btnCurtir=ObjectProperty(None)
+    quantCurtidas = 0
+    labelQuantC = ObjectProperty(None)
+    id_post = 0
+    def __init__(self, id_post, data_hora, quantCurtidas, nome, usuario, mensagem, fota, **kwargs):
         super().__init__(**kwargs)
         self.spacing=0
         self.padding=0
+
+        self.quantCurtidas = quantCurtidas
+        self.id_post = id_post
 
         layout=GridLayout(
             cols=2
@@ -120,21 +135,24 @@ class Postagem(BoxLayout):
 
         #Botões
         gridIcones=GridLayout(
-            cols=4,
+            cols=6,
             spacing=50
         )
-        aux = Label(text="")
-        btnCurtir=Botao(
-            background_normal='telas/imagens/curtir.png'
-        )
+        self.btnCurtir = Botao()
         btnComentar=Botao(
             background_normal='telas/imagens/comentario.png'
         )
-        aux2 = Label(text="")
-        gridIcones.add_widget(aux)
+        
+        self.labelQuantC = Label(
+            text=f"{quantCurtidas} curt."
+        )
+
+        gridIcones.add_widget(Label(text=""))
+        gridIcones.add_widget(Label(text=""))
         gridIcones.add_widget(btnComentar)
-        gridIcones.add_widget(btnCurtir)
-        gridIcones.add_widget(aux2)
+        gridIcones.add_widget(self.btnCurtir)
+        gridIcones.add_widget(self.labelQuantC)
+        gridIcones.add_widget(Label(text=""))
         box.add_widget(gridIcones)
 
         #Data e hora
@@ -155,3 +173,64 @@ class Postagem(BoxLayout):
             # size_hint_y=0.4
         )
         self.add_widget(imgLinha)
+
+        #busca quem o usuario segue
+        UrlRequest(f'http://127.0.0.1:5000//api/verifica_curtida/{id_post}',
+            req_headers = {
+                'Authorization': f'Bearer {AppConfig.get_config("token")}'
+            },
+            on_success = self.curtida_sucesso
+        )
+    
+    def curtida_sucesso(self, req, resposta):
+        self.btnCurtir.bind(on_press=self.funcaoCurtida)
+        if resposta["status"] == 0:
+            #mostra o botao preenchido
+            self.btnCurtir.background_normal='telas/imagens/curtido.png'
+            self.btnCurtir.background_down='telas/imagens/curtido.png'
+        else:
+            #mostra a opção de curtir
+            self.btnCurtir.background_normal='telas/imagens/curtir.png'
+            self.btnCurtir.background_down='telas/imagens/curtir.png'
+
+    def funcaoCurtida(instance, *args):
+        botao = instance.btnCurtir
+        quantL = instance.labelQuantC
+        if botao.background_down == "telas/imagens/curtir.png":
+            #postagem foi curtida
+            botao.background_normal='telas/imagens/curtido.png'
+            botao.background_down='telas/imagens/curtido.png'
+
+            #label
+            quant = quantL.text
+            quant = quant.split(sep=" ")
+            quant = int(quant[0])
+            quant +=1
+            quantL.text = f"{quant} curt."
+            
+            id_post = instance.id_post
+            UrlRequest(f'http://127.0.0.1:5000/api/curtir/{id_post}',
+                req_headers = {
+                    'Authorization': f'Bearer {AppConfig.get_config("token")}'
+                },
+                method="POST"
+            )
+        else:
+            #postagem foi deixada de curtir
+            botao.background_normal='telas/imagens/curtir.png'
+            botao.background_down='telas/imagens/curtir.png'
+
+            #label
+            quant = quantL.text
+            quant = quant.split(sep=" ")
+            quant = int(quant[0])
+            quant -=1
+            quantL.text = f"{quant} curt."
+
+            id_post = instance.id_post
+            UrlRequest(f'http://127.0.0.1:5000/api/descurtir/{id_post}',
+                req_headers = {
+                    'Authorization': f'Bearer {AppConfig.get_config("token")}'
+                },
+                method="DELETE"
+            )
