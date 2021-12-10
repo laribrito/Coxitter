@@ -3,6 +3,7 @@ from kivy.uix.screenmanager import Screen
 from menu import Menu
 from titulo import Titulo
 from kivy.network.urlrequest import UrlRequest
+from kivy.uix.screenmanager import NoTransition, SlideTransition
 from kivy.properties import ObjectProperty
 
 #class appConfig
@@ -31,10 +32,16 @@ class Pesquisar(Screen):
 
     def busca_sucesso(self, req, resposta):
         if resposta["status"] == 0:
-            self.manager.current = 'buscaPerfil'
-            self.manager.transition.direction = 'left'
-            self.manager.current_screen.mostraPerfil(resposta)
-            self.setMensagem.text=""
+            if resposta["login"] == AppConfig.get_config("login"):
+                self.manager = AppConfig.manager
+                self.manager.transition.direction = 'right'
+                self.manager.current="perfil"
+                self.manager.transition = SlideTransition()
+            else:
+                self.manager.current = 'buscaPerfil'
+                self.manager.transition.direction = 'left'
+                self.manager.current_screen.mostraPerfil(resposta)
+                self.setMensagem.text=""
         else:
             self.setMensagem.text=resposta["msg"]
     
