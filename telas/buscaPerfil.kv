@@ -1,0 +1,81 @@
+#:kivy 2.0
+#:include telas/widgets_confi.kv
+<Label>:
+    font_name: 'telas/fontes/NewsCycle.ttf'
+    font_size: '20sp'
+    color: 0,0,0,1
+
+<BuscaPerfil>:
+    canvas.before:
+        Color:
+            rgba: .95, .95, .95, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    #Widgets que serão trabalhados pelo arquivo .py
+    setLogin: setLogin
+    setNome: setNome
+    setFoto: setFoto
+    setBtnSeguir: setBtnSeguir
+    caixinha: caixinha
+
+    ScrollViewMenu:
+        canvas.before:
+            Color:
+                rgba: .95, .95, .95, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        GridLayout:
+            cols: 1
+            BoxLayout:
+                orientation: 'vertical'
+                canvas.before:
+                    Color:
+                        rgba: .80, .91, 1, 1
+                    Rectangle:
+                        pos: self.x,self.y+self.height/2
+                        size: self.width,self.height/2
+                GridLayout:
+                    cols: 2
+                    padding: 20
+                    
+                    AsyncImage:
+                        id: setFoto
+                        # source:"telas/imagens/padrao.png"
+                        allow_stretch: True
+                        height: self.texture_size[1] + dp(50)
+                        size_hint_y: 0.4
+                    BoxLayout:
+                        orientation: 'vertical'
+                        Label:
+                            id: setNome
+                            text:' '
+                        Label:
+                            id: setLogin
+                            text:' '
+            
+            BoxLayout:
+                orientation: 'vertical'
+                # Label:
+                #     text: "Biografia..."
+                GridLayout:
+                    cols: 2
+                    height: 100
+                    BoxLayout:
+                        size_hint_x: .92
+                        orientation: 'vertical'
+                        Label:
+                            text:'x seguidores'
+                        Label:
+                            text:'y seguindo'
+                    BoxLayout:
+                        size_hint_x: .3
+                        #regula o tamanho do botão Sair
+                        id: setBtnSeguir
+
+                Label:
+                    text:'Postagens'
+                    font_name: 'telas/fontes/NewsCycle-Bold.ttf'
+                BoxLayout:
+                    id: caixinha

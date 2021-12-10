@@ -48,8 +48,8 @@ class MyApp(App):
         #sm.add_widget(Feed(name='feed'))
         from telapesquisar import Pesquisar
         sm.add_widget(Pesquisar(name='pesquisar'))
-        from telaresultados import Resultados
-        sm.add_widget(Resultados(name='resultados'))
+        from telaBuscaPerfil import BuscaPerfil
+        sm.add_widget(BuscaPerfil(name='buscaPerfil'))
 
         AppConfig.manager = sm 
 

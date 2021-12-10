@@ -6,6 +6,7 @@
     color: 0,0,0,1
 
 <Pesquisar>:
+    setMensagem: setMensagem
     canvas.before:
         Color:
             rgba: .80, .91, 1, 1
@@ -36,11 +37,16 @@
                     color: .2, .2, .2,1
                     background_normal: ""
                     on_press:
-                        root.manager.current = 'resultados'
-                        root.manager.transition.direction = 'left'
+                        root.buscaPerfil(getUser.text)
             BoxLayout:
                 Label:
-                    text: "Procure um Usuário ou Conta"
+                    text: "Procure um Usuário pelo login"
                     font_size: '18sp'
+                    size_hint: 1, 0.5
+                    color: 0 , 0 , 0 , 1
+                Label:
+                    text: ""
+                    id: setMensagem
+                    font_size: '15sp'
                     size_hint: 1, 0.5
                     color: 0 , 0 , 0 , 1
