@@ -22,7 +22,7 @@
 <h2 id='objetivo'>Objetivo</h2>
 
 A proposta foi construir uma rede social simples no estilo do Twitter, com mensagens de texto públicas, que podem ser curtidas, etc. A nossa rede social se chama Coxitter! Nesse repositório estão nossas telas kv, funcionamento do aplicativo, uso da nossa 
-[API Restfull.](github.com/laribrito/API/)
+[API Restfull.](https://github.com/laribrito/API/)
 
 <h2 id='requisitos'> Pré-requisitos e run </h2>
 
